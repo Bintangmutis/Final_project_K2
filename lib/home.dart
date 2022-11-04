@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:final_project_kel_2/Auth/login.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -27,7 +28,6 @@ class Home extends StatelessWidget {
       child: Image.asset(
         'images/home.png',
         colorBlendMode: BlendMode.softLight,
-        fit: BoxFit.fill,
       ),
     );
 
@@ -109,7 +109,12 @@ class Home extends StatelessWidget {
               child: MaterialButton(
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()));
+                },
                 color: const Color.fromARGB(255, 0, 159, 252),
                 textColor: Colors.white,
                 minWidth: 350,
