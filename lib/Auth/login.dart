@@ -1,5 +1,9 @@
 import 'package:final_project_kel_2/Auth/signup.dart';
+import 'package:final_project_kel_2/Screens/menu_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:final_project_kel_2/provider/login_provider.dart';
+import 'package:flutter_login/flutter_login.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,9 +16,12 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController username = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _obscure = true;
 
   @override
   Widget build(BuildContext context) {
+    final loginResponse = Provider.of<LoginProv>(context, listen: false);
+
     <String, WidgetBuilder>{
       '/signup': (BuildContext context) => const SignUpPage()
     };
@@ -95,11 +102,20 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextField(
                       controller: _passwordController,
-                      decoration: const InputDecoration(
+                      obscureText: _obscure,
+                      decoration: InputDecoration(
                           labelText: 'Password',
-                          suffixIcon: Icon(
-                            Icons.remove_red_eye,
-                          ),
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (_obscure) {
+                                    _obscure = false;
+                                  } else {
+                                    _obscure = true;
+                                  }
+                                });
+                              },
+                              icon: Icon(Icons.remove_red_eye)),
                           labelStyle: TextStyle(
                               fontFamily: 'Serif',
                               fontWeight: FontWeight.bold,
@@ -108,7 +124,6 @@ class _LoginPageState extends State<LoginPage> {
                             borderSide: BorderSide(
                                 color: Color.fromARGB(255, 0, 12, 124)),
                           )),
-                      obscureText: true,
                     ),
                     const SizedBox(
                       height: 16,
@@ -172,7 +187,14 @@ class _LoginPageState extends State<LoginPage> {
                         color: const Color.fromARGB(255, 0, 159, 252),
                         elevation: 7,
                         child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              loginResponse.Login(_emailController.text,
+                                  _passwordController.text);
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => MenuPage()),
+                              );
+                            },
                             child: const Center(
                                 child: Text('LOGIN',
                                     style: TextStyle(

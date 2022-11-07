@@ -11,6 +11,9 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController username = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordConfirmController =
+      TextEditingController();
+  GlobalKey<FormState> _formkey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +113,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       height: 16,
                     ),
                     TextField(
-                      controller: _passwordController,
+                      controller: _passwordConfirmController,
                       decoration: const InputDecoration(
                           labelText: 'Confirm Password',
                           suffixIcon: Icon(
