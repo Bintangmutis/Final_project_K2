@@ -82,30 +82,31 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Container(
                 padding: const EdgeInsets.only(top: 8, left: 20, right: 30),
-                child: Column(
-                  children: <Widget>[
-                    TextField(
-                      controller: _emailController,
-                      decoration: const InputDecoration(
-                          labelText: 'Email',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Serif',
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 92, 90, 90)),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 12, 124)),
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    TextField(
-                      controller: _passwordController,
-                      obscureText: _obscure,
-                      decoration: InputDecoration(
-                          labelText: 'Password',
-                          suffixIcon: IconButton(
+                child: Consumer<LoginProv>(
+                  builder: (context, value, child) => Column(
+                    children: <Widget>[
+                      TextField(
+                        controller: _emailController,
+                        decoration: const InputDecoration(
+                            labelText: 'Email',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Serif',
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 92, 90, 90)),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 12, 124)),
+                            )),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      TextField(
+                        controller: _passwordController,
+                        obscureText: _obscure,
+                        decoration: InputDecoration(
+                            labelText: 'Password',
+                            suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
                                   if (_obscure) {
@@ -115,95 +116,107 @@ class _LoginPageState extends State<LoginPage> {
                                   }
                                 });
                               },
-                              icon: Icon(Icons.remove_red_eye)),
-                          labelStyle: TextStyle(
-                              fontFamily: 'Serif',
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 92, 90, 90)),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 12, 124)),
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        InkWell(
-                          onTap: () {},
-                          child: const Text('Forgot Password?',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 0, 47, 200),
-                                  fontFamily: 'Serif',
-                                  fontWeight: FontWeight.bold,
-                                  shadows: [
-                                    Shadow(
-                                      color: Color.fromARGB(255, 91, 168, 255),
-                                      blurRadius: 10.0,
-                                      offset: Offset(3, 2),
-                                    ),
-                                  ])),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const SignUpPage()));
-                          },
-                          child: const Text('Sign Up',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 0, 47, 200),
-                                  fontFamily: 'Serif',
-                                  fontWeight: FontWeight.bold,
-                                  shadows: [
-                                    Shadow(
-                                      color: Color.fromARGB(255, 91, 168, 255),
-                                      blurRadius: 10.0,
-                                      offset: Offset(3, 2),
-                                    ),
-                                  ])),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 100,
-                    ),
-                    SizedBox(
-                      height: 45,
-                      child: Material(
-                        borderRadius: BorderRadius.circular(20),
-                        shadowColor: const Color.fromARGB(255, 0, 47, 200),
-                        color: const Color.fromARGB(255, 0, 159, 252),
-                        elevation: 7,
-                        child: GestureDetector(
-                            onTap: () {
-                              loginResponse.Login(_emailController.text,
-                                  _passwordController.text);
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => MenuPage()),
-                              );
-                            },
-                            child: const Center(
-                                child: Text('LOGIN',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Serif')))),
+                              icon: Icon(Icons.remove_red_eye),
+                            ),
+                            labelStyle: TextStyle(
+                                fontFamily: 'Serif',
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 92, 90, 90)),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 0, 12, 124)),
+                            )),
                       ),
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          InkWell(
+                            onTap: () {},
+                            child: const Text('Forgot Password?',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 0, 47, 200),
+                                    fontFamily: 'Serif',
+                                    fontWeight: FontWeight.bold,
+                                    shadows: [
+                                      Shadow(
+                                        color:
+                                            Color.fromARGB(255, 91, 168, 255),
+                                        blurRadius: 10.0,
+                                        offset: Offset(3, 2),
+                                      ),
+                                    ])),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SignUpPage()));
+                            },
+                            child: const Text('Sign Up',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 0, 47, 200),
+                                    fontFamily: 'Serif',
+                                    fontWeight: FontWeight.bold,
+                                    shadows: [
+                                      Shadow(
+                                        color:
+                                            Color.fromARGB(255, 91, 168, 255),
+                                        blurRadius: 10.0,
+                                        offset: Offset(3, 2),
+                                      ),
+                                    ])),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 100,
+                      ),
+                      SizedBox(
+                        height: 45,
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20),
+                          shadowColor: const Color.fromARGB(255, 0, 47, 200),
+                          color: const Color.fromARGB(255, 0, 159, 252),
+                          elevation: 7,
+                          child: GestureDetector(
+                              onTap: () {
+                                if (_emailController.text ==
+                                        value.data["email"] &&
+                                    _passwordController.text ==
+                                        value.data["pasword"]) {
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) => MenuPage()),
+                                  );
+                                } else {
+                                  AlertDialog(
+                                    title: Text("error"),
+                                  );
+                                }
+                              },
+                              child: const Center(
+                                  child: Text('LOGIN',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Serif')))),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],

@@ -1,4 +1,4 @@
-import 'package:final_project_kel_2/home.dart';
+import 'package:final_project_kel_2/Screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:final_project_kel_2/provider/login_provider.dart';

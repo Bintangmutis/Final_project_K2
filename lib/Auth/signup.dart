@@ -13,6 +13,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordConfirmController =
       TextEditingController();
+  bool _obscure = true;
   GlobalKey<FormState> _formkey = GlobalKey();
 
   @override
@@ -94,10 +95,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     TextField(
                       controller: _passwordController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                           labelText: 'Password',
-                          suffixIcon: Icon(
-                            Icons.remove_red_eye,
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                if (_obscure) {
+                                  _obscure = false;
+                                } else {
+                                  _obscure = true;
+                                }
+                              });
+                            },
+                            icon: Icon(Icons.remove_red_eye),
                           ),
                           labelStyle: TextStyle(
                               fontFamily: 'Serif',
@@ -114,10 +124,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     TextField(
                       controller: _passwordConfirmController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                           labelText: 'Confirm Password',
-                          suffixIcon: Icon(
-                            Icons.remove_red_eye,
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                if (_obscure) {
+                                  _obscure = false;
+                                } else {
+                                  _obscure = true;
+                                }
+                              });
+                            },
+                            icon: Icon(Icons.remove_red_eye),
                           ),
                           labelStyle: TextStyle(
                               fontFamily: 'Serif',
