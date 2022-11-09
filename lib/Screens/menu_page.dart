@@ -9,12 +9,14 @@ class MenuPage extends StatelessWidget {
       List.generate(100, (index) => {"id": index, "name": "Product $index"})
           .toList();
 
+  MenuPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("data"),
+          title: const Text("data"),
         ),
         body: Container(
           padding: EdgeInsets.all(10),
@@ -146,19 +148,38 @@ class MenuPage extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.blue.shade100,
+          currentIndex: 0,
+          items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
+                icon: Icon(
+                  Icons.home_rounded,
+                  size: 32,
+                  color: Colors.blue,
+                ),
+                label: 'Home'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.open_in_new_rounded),
-              label: 'Open Dialog',
-            ),
+                icon: Icon(
+                  Icons.star_rounded,
+                  size: 32,
+                  color: Colors.blue,
+                ),
+                label: 'Wishlist'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.open_in_new_rounded),
-              label: 'Open Dialog',
-            ),
+                icon: Icon(
+                  Icons.shopping_cart_rounded,
+                  size: 32,
+                  color: Colors.blue,
+                ),
+                label: 'Keranjang'),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.people,
+                  size: 32,
+                  color: Colors.blue,
+                ),
+                label: 'About Go-Shop'),
           ],
         ),
       ),

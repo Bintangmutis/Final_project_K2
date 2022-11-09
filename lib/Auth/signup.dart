@@ -1,3 +1,4 @@
+import 'package:final_project_kel_2/Auth/login.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -152,20 +153,37 @@ class _SignUpPageState extends State<SignUpPage> {
                       height: 90,
                     ),
                     SizedBox(
-                      height: 45,
-                      child: Material(
-                        borderRadius: BorderRadius.circular(20),
-                        shadowColor: const Color.fromARGB(255, 0, 47, 200),
-                        color: const Color.fromARGB(255, 0, 159, 252),
-                        elevation: 7,
-                        child: GestureDetector(
-                            onTap: () {},
-                            child: const Center(
-                                child: Text('SIGN UP',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Serif')))),
+                      height: 45.0,
+                      child: MaterialButton(
+                        onPressed: () {},
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(80.0)),
+                        padding: const EdgeInsets.all(0.0),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [
+                                  Color.fromARGB(255, 68, 85, 195),
+                                  Color(0xff64B6FF)
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                              borderRadius: BorderRadius.circular(30.0)),
+                          child: Container(
+                            constraints: const BoxConstraints(
+                                maxWidth: 400.0, minHeight: 50.0),
+                            alignment: Alignment.center,
+                            child: const Text(
+                              "SIGN UP",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Serif",
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ],

@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:final_project_kel_2/Auth/login.dart';
+import 'package:final_project_kel_2/Screens/success_page.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -7,27 +8,20 @@ class Home extends StatelessWidget {
   Home({super.key});
 
   var colorizeColors = [
-    const Color.fromARGB(255, 62, 65, 102),
-    Colors.blue,
+    const Color.fromARGB(255, 0, 140, 255),
     Colors.white,
-    Colors.indigo,
+    Colors.blue.shade900,
+    Colors.blue,
   ];
 
   @override
   Widget build(BuildContext context) {
-    Widget logo = Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-              color: Colors.black12,
-              spreadRadius: 1,
-              blurRadius: 5,
-              offset: Offset.fromDirection(-15, -4))
-        ],
-      ),
-      child: Image.asset(
-        'images/home.png',
-        colorBlendMode: BlendMode.softLight,
+    Widget logo = const CircleAvatar(
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      radius: 100,
+      child: CircleAvatar(
+        radius: 95,
+        backgroundImage: AssetImage('images/logo.jpg'),
       ),
     );
 
@@ -37,9 +31,10 @@ class Home extends StatelessWidget {
         const Text(
           'Selamat Datang ',
           style: TextStyle(
-            fontSize: 20.0,
+            fontSize: 25.0,
             fontFamily: 'Serif',
-            color: Color.fromARGB(255, 62, 65, 102),
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
         Center(
@@ -49,7 +44,8 @@ class Home extends StatelessWidget {
             animatedTexts: [
               ColorizeAnimatedText("GO-SHOP",
                   textStyle: const TextStyle(
-                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30.0,
                     fontFamily: 'Serif',
                   ),
                   colors: colorizeColors)
@@ -61,9 +57,10 @@ class Home extends StatelessWidget {
 
     Widget desc = DefaultTextStyle(
       style: const TextStyle(
+        fontWeight: FontWeight.bold,
         fontSize: 13.5,
         fontFamily: 'Serif',
-        color: Color.fromARGB(255, 62, 65, 102),
+        color: Color.fromARGB(255, 255, 255, 255),
       ),
       child: AnimatedTextKit(
         pause: const Duration(milliseconds: 5000),
@@ -75,58 +72,64 @@ class Home extends StatelessWidget {
       ),
     );
 
+    Widget buttonhome = SizedBox(
+      height: 45.0,
+      child: MaterialButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const LoginPage()));
+        },
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+        padding: const EdgeInsets.all(0.0),
+        child: Ink(
+          decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Color.fromARGB(255, 68, 85, 195), Color(0xff64B6FF)],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              borderRadius: BorderRadius.circular(30.0)),
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+            alignment: Alignment.center,
+            child: const Text(
+              "Continue",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "Serif",
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      ),
+    );
+
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                stops: const [
-              0.4,
-              0.9,
-            ],
-                colors: [
-              const Color.fromARGB(255, 133, 180, 255),
-              Colors.grey.shade300
-            ])),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("images/background.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: ListView(shrinkWrap: true, children: <Widget>[
             logo,
             const SizedBox(
-              height: 30,
+              height: 10,
             ),
             judul,
             const SizedBox(
-              height: 9,
+              height: 5,
             ),
             Center(child: desc),
             const SizedBox(
-              height: 30,
+              height: 50,
             ),
-            Padding(
-              padding: const EdgeInsets.all(2),
-              child: MaterialButton(
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginPage()));
-                },
-                color: const Color.fromARGB(255, 0, 159, 252),
-                textColor: Colors.white,
-                minWidth: 350,
-                height: 45,
-                child: const Text(
-                  'Lets Go',
-                  style: TextStyle(
-                      fontFamily: "Serif", fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ],
+            Center(child: buttonhome)
+          ]),
         ),
       ),
     );
