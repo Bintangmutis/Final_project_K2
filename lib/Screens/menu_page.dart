@@ -1,143 +1,132 @@
+import 'package:final_project_kel_2/Screens/product_detail.dart';
+import 'package:final_project_kel_2/provider/card_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
+import '../provider/product_provider.dart';
 
-class MenuPage extends StatelessWidget {
-  // const MenuPage({super.key});
-
-  final List<Map> myProducts =
-      List.generate(100, (index) => {"id": index, "name": "Product $index"})
-          .toList();
+class MenuPage extends StatefulWidget {
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: Business',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 3: Settings',
+      style: optionStyle,
+    ),
+  ];
 
   @override
+  State<MenuPage> createState() => _MenuPageState();
+}
+
+class _MenuPageState extends State<MenuPage> {
+  // const MenuPage({super.key});
+  // final List<String> item = [
+  //   "T-shirt",
+  //   "T-shirt",
+  //   "T-shirt",
+  //   "T-shirt",
+  //   "T-shirt",
+  //   "T-shirt",
+  //   "T-shirt",
+  //   "T-shirt",
+  //   "T-shirt",
+  //   "T-shirt",
+  //   "T-shirt",
+  //   "T-shirt",
+  //   "T-shirt",
+  //   "T-shirt",
+  // ];
+
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  bool shadowColor = false;
+  @override
   Widget build(BuildContext context) {
+    final productData = Provider.of<Products>(context).listProduct;
+
     return MaterialApp(
+      routes: {ProductDetail.routeName: (context) => ProductDetail()},
       home: Scaffold(
+        extendBody: true,
+        // primary: true,
         appBar: AppBar(
-          title: Text("data"),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: Container(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.filter_list),
+            ),
+          ),
+          actions: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 4),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.search),
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 4),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.person),
+              ),
+            ),
+          ],
         ),
         body: Container(
           padding: EdgeInsets.all(10),
           child: Column(
             children: [
               // ===== MENU =====
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.filter_list),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.person),
-                    ),
-                  ),
-                ],
-              ),
               SizedBox(
                 height: 8,
-              ),
-              // ===== SEARCH =====
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.blue,
-                    ),
-                    padding: EdgeInsets.fromLTRB(20, 0, 5, 0),
-                    width: 300,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.search),
-                        ),
-                        hintText: "Search",
-                      ),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.filter_list),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              // ===== CATEGORY =====
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Text("Category"),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Text("Category"),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Text("Category"),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Text("Category"),
-                  ),
-                ],
               ),
               Expanded(
                 child: GridView.builder(
-                  // shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200,
-                      childAspectRatio: 3 / 2,
-                      mainAxisSpacing: 30,
-                      crossAxisSpacing: 30),
-                  itemBuilder: (context, idx) {
-                    return Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Text(myProducts[idx]["name"]),
+                  itemCount: productData.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, mainAxisExtent: 300),
+                  itemBuilder: (context, index) {
+                    return ChangeNotifierProvider.value(
+                      value: productData[index],
+                      child: CardProduct(),
                     );
                   },
                 ),
@@ -150,16 +139,28 @@ class MenuPage extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
+              backgroundColor: Colors.blue,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.open_in_new_rounded),
-              label: 'Open Dialog',
+              backgroundColor: Colors.blue,
+              icon: Icon(Icons.star_border_outlined),
+              label: 'Wishlist',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.open_in_new_rounded),
-              label: 'Open Dialog',
+              backgroundColor: Colors.blue,
+              icon: Icon(Icons.add_shopping_cart),
+              label: 'Cart',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_outlined),
+              label: 'Account',
+              backgroundColor: Colors.blue,
             ),
           ],
+          currentIndex: _selectedIndex,
+          unselectedItemColor: Colors.black,
+          selectedItemColor: Colors.white,
+          onTap: _onItemTapped,
         ),
       ),
     );

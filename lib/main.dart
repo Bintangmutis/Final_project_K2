@@ -1,4 +1,6 @@
 import 'package:final_project_kel_2/Screens/home.dart';
+import 'package:final_project_kel_2/Screens/product_detail.dart';
+import 'package:final_project_kel_2/provider/product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:final_project_kel_2/provider/login_provider.dart';
@@ -16,8 +18,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => LoginProv(),
         ),
+        ChangeNotifierProvider(create: (context) => Products()),
       ],
       child: MaterialApp(
+        routes: {
+          ProductDetail.routeName: (context) => ProductDetail(),
+        },
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(

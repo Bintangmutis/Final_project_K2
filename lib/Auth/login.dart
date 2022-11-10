@@ -17,10 +17,11 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscure = true;
+  GlobalKey<FormState> emailKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    // final loginResponse = Provider.of<LoginProv>(context, listen: false);
+    final loginResponse = Provider.of<LoginProv>(context);
 
     <String, WidgetBuilder>{
       '/signup': (BuildContext context) => const SignUpPage()
@@ -85,6 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: <Widget>[
                     TextField(
+                      key: emailKey,
                       controller: _emailController,
                       decoration: const InputDecoration(
                           labelText: 'Email',
@@ -190,6 +192,8 @@ class _LoginPageState extends State<LoginPage> {
                         elevation: 7,
                         child: GestureDetector(
                             onTap: () {
+                              loginResponse.Login(_emailController.text,
+                                  _passwordController.text);
                               // if (_emailController.text ==
                               //         value.data["email"] &&
                               //     _passwordController.text ==
@@ -200,10 +204,10 @@ class _LoginPageState extends State<LoginPage> {
                               //     title: Text("error"),
                               //   );
                               // }
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => MenuPage()),
-                              );
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MenuPage()));
                             },
                             child: const Center(
                                 child: Text('LOGIN',
