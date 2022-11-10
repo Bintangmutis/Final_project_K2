@@ -28,6 +28,8 @@ class MenuPage extends StatefulWidget {
     ),
   ];
 
+  MenuPage({super.key});
+
   @override
   State<MenuPage> createState() => _MenuPageState();
 }
@@ -135,27 +137,38 @@ class _MenuPageState extends State<MenuPage> {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.blue.shade100,
+          // currentIndex: 0,
+          items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: Colors.blue,
-            ),
+                icon: Icon(
+                  Icons.home_rounded,
+                  size: 32,
+                  color: Colors.blue,
+                ),
+                label: 'Home'),
             BottomNavigationBarItem(
-              backgroundColor: Colors.blue,
-              icon: Icon(Icons.star_border_outlined),
-              label: 'Wishlist',
-            ),
+                icon: Icon(
+                  Icons.star_rounded,
+                  size: 32,
+                  color: Colors.blue,
+                ),
+                label: 'Wishlist'),
             BottomNavigationBarItem(
-              backgroundColor: Colors.blue,
-              icon: Icon(Icons.add_shopping_cart),
-              label: 'Cart',
-            ),
+                icon: Icon(
+                  Icons.shopping_cart_rounded,
+                  size: 32,
+                  color: Colors.blue,
+                ),
+                label: 'Keranjang'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_outlined),
-              label: 'Account',
-              backgroundColor: Colors.blue,
-            ),
+                icon: Icon(
+                  Icons.people,
+                  size: 32,
+                  color: Colors.blue,
+                ),
+                label: 'About Go-Shop'),
           ],
           currentIndex: _selectedIndex,
           unselectedItemColor: Colors.black,

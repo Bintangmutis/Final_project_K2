@@ -184,37 +184,51 @@ class _LoginPageState extends State<LoginPage> {
                       height: 100,
                     ),
                     SizedBox(
-                      height: 45,
-                      child: Material(
-                        borderRadius: BorderRadius.circular(20),
-                        shadowColor: const Color.fromARGB(255, 0, 47, 200),
-                        color: const Color.fromARGB(255, 0, 159, 252),
-                        elevation: 7,
-                        child: GestureDetector(
-                            onTap: () {
-                              loginResponse.Login(_emailController.text,
-                                  _passwordController.text);
-                              // if (_emailController.text ==
-                              //         value.data["email"] &&
-                              //     _passwordController.text ==
-                              //         value.data["pasword"]) {
+                      height: 45.0,
+                      child: MaterialButton(
+                        onPressed: () {
+                          // if (_emailController.text ==
+                          //         value.data["email"] &&
+                          //     _passwordController.text ==
+                          //         value.data["pasword"]) {
 
-                              // } else {
-                              //   AlertDialog(
-                              //     title: Text("error"),
-                              //   );
-                              // }
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MenuPage()));
-                            },
-                            child: const Center(
-                                child: Text('LOGIN',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Serif')))),
+                          // } else {
+                          //   AlertDialog(
+                          //     title: Text("error"),
+                          //   );
+                          // }
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (context) => MenuPage()),
+                          );
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(80.0)),
+                        padding: const EdgeInsets.all(0.0),
+                        child: Ink(
+                          decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [
+                                  Color.fromARGB(255, 68, 85, 195),
+                                  Color(0xff64B6FF)
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                              borderRadius: BorderRadius.circular(30.0)),
+                          child: Container(
+                            constraints: const BoxConstraints(
+                                maxWidth: 400.0, minHeight: 50.0),
+                            alignment: Alignment.center,
+                            child: const Text(
+                              "LOGIN",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Serif",
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ],
