@@ -30,7 +30,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
     return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
           backgroundColor: const Color.fromARGB(255, 71, 147, 248),
           shadowColor: const Color.fromARGB(255, 0, 11, 106),
           centerTitle: true,
@@ -110,11 +109,11 @@ class _SignUpPageState extends State<SignUpPage> {
                             },
                             icon: Icon(Icons.remove_red_eye),
                           ),
-                          labelStyle: TextStyle(
+                          labelStyle: const TextStyle(
                               fontFamily: 'Serif',
                               fontWeight: FontWeight.bold,
                               color: Color.fromARGB(255, 92, 90, 90)),
-                          focusedBorder: UnderlineInputBorder(
+                          focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Color.fromARGB(255, 0, 12, 124)),
                           )),

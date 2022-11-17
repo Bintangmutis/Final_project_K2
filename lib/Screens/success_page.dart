@@ -65,7 +65,7 @@ class Success extends StatelessWidget {
           padding: const EdgeInsets.only(top: 120.0),
           children: [
             Center(child: check),
-            const SizedBox(height: 40),
+            const SizedBox(height: 30),
             const Center(
               child: Text(
                 'ORDER SUCCESS!!',
@@ -77,7 +77,7 @@ class Success extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 250),
+            const SizedBox(height: 260),
             Center(
               child: button,
             )

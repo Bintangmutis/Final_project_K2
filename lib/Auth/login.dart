@@ -117,13 +117,13 @@ class _LoginPageState extends State<LoginPage> {
                               }
                             });
                           },
-                          icon: Icon(Icons.remove_red_eye),
+                          icon: const Icon(Icons.remove_red_eye),
                         ),
-                        labelStyle: TextStyle(
+                        labelStyle: const TextStyle(
                             fontFamily: 'Serif',
                             fontWeight: FontWeight.bold,
                             color: Color.fromARGB(255, 92, 90, 90)),
-                        focusedBorder: UnderlineInputBorder(
+                        focusedBorder: const UnderlineInputBorder(
                           borderSide: BorderSide(
                               color: Color.fromARGB(255, 0, 12, 124)),
                         ),

@@ -18,22 +18,23 @@ class ProductDetail extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new_rounded),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
-          title: Text("Product"),
+          title: const Text("Product"),
         ),
         body: ListView(
           children: [
+            // ignore: avoid_unnecessary_containers
             Container(
               // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
@@ -52,7 +53,8 @@ class ProductDetail extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     child: Column(
                       children: [
                         Row(
@@ -60,7 +62,7 @@ class ProductDetail extends StatelessWidget {
                           children: [
                             Text(
                               productData.productName,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 28,
                                 fontWeight: FontWeight.w300,
                                 fontFamily: "Serif",
@@ -70,7 +72,7 @@ class ProductDetail extends StatelessWidget {
                               children: [
                                 Text(
                                   productData.productPrice,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.w300,
                                     fontFamily: "Serif",
@@ -80,16 +82,16 @@ class ProductDetail extends StatelessWidget {
                             )
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         SizedBox(
-                          child: Container(
-                            decoration: BoxDecoration(color: Colors.blue),
-                          ),
                           height: 1,
+                          child: Container(
+                            decoration: const BoxDecoration(color: Colors.blue),
+                          ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Column(
@@ -105,7 +107,7 @@ class ProductDetail extends StatelessWidget {
                             ),
                             Text(
                               _textLorem,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 12,
                                 fontFamily: "Serif",
                               ),
@@ -121,7 +123,7 @@ class ProductDetail extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -130,11 +132,11 @@ class ProductDetail extends StatelessWidget {
                 splashRadius: 20,
                 color: Colors.blue,
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.add_shopping_cart,
                 ),
               ),
-              OutlinedButton(onPressed: () {}, child: Text("Checkout")),
+              OutlinedButton(onPressed: () {}, child: const Text("Checkout")),
             ],
           ),
         ),
