@@ -18,110 +18,108 @@ class ProductDetail extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new_rounded),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
-          title: Text("Product"),
+          title: const Text("Product"),
         ),
         body: ListView(
           children: [
-            Container(
-              // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(5, 0),
-                          spreadRadius: 0.75,
-                          blurRadius: 3.0,
-                        ),
-                      ],
-                    ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(5, 0),
+                        spreadRadius: 0.75,
+                        blurRadius: 3.0,
+                      ),
+                    ],
+                  ),
+                  width: double.infinity,
+                  height: 300,
+                  child: Image.asset(
+                    productData.productImg,
                     width: double.infinity,
-                    height: 300,
-                    child: Image.asset(
-                      productData.productImg,
-                      width: double.infinity,
-                      // fit: BoxFit.fill,
-                    ),
+                    // fit: BoxFit.fill,
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              productData.productName,
-                              style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w300,
-                                fontFamily: "Serif",
-                              ),
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            productData.productName,
+                            style: const TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w300,
+                              fontFamily: "Serif",
                             ),
-                            Column(
-                              children: [
-                                Text(
-                                  productData.productPrice,
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w300,
-                                    fontFamily: "Serif",
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        SizedBox(
-                          child: Container(
-                            decoration: BoxDecoration(color: Colors.blue),
                           ),
-                          height: 1,
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Deskripsi Produk",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w300,
-                                fontFamily: "Serif",
+                          Column(
+                            children: [
+                              Text(
+                                productData.productPrice,
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w300,
+                                  fontFamily: "Serif",
+                                ),
                               ),
-                            ),
-                            Text(
-                              _textLorem,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: "Serif",
-                              ),
-                            ),
-                          ],
+                            ],
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      SizedBox(
+                        height: 1,
+                        child: Container(
+                          decoration: const BoxDecoration(color: Colors.blue),
                         ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Deskripsi Produk",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w300,
+                              fontFamily: "Serif",
+                            ),
+                          ),
+                          Text(
+                            _textLorem,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontFamily: "Serif",
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),
         bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -130,7 +128,7 @@ class ProductDetail extends StatelessWidget {
                 splashRadius: 20,
                 color: Colors.blue,
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.add_shopping_cart,
                 ),
               ),
@@ -138,26 +136,6 @@ class ProductDetail extends StatelessWidget {
             ],
           ),
         ),
-        // BottomNavigationBar(
-        //   items: <BottomNavigationBarItem>[
-        //     BottomNavigationBarItem(
-        //       icon: OutlinedButton(onPressed: () {}, child: Text("Checkout")),
-        //       label: "Checkout",
-        //     ),
-        //     BottomNavigationBarItem(
-        //       icon: Icon(Icons.add_shopping_cart),
-        //       label: "Checkout",
-        //     ),
-        //     BottomNavigationBarItem(
-        //       icon: Icon(Icons.add_shopping_cart),
-        //       label: "Checkout",
-        //     ),
-        //     BottomNavigationBarItem(
-        //       icon: Icon(Icons.add_shopping_cart),
-        //       label: "Checkout",
-        //     ),
-        //   ],
-        // ),
       ),
     );
   }

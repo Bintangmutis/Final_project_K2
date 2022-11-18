@@ -18,3 +18,15 @@ class Product with ChangeNotifier {
     required this.productPrice,
   });
 }
+
+class User with ChangeNotifier {
+  final String userName;
+  final String userToken;
+  final String userEmail;
+
+  User({
+    required this.userName,
+    required this.userToken,
+    required this.userEmail,
+  });
+}

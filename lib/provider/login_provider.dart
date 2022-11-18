@@ -2,30 +2,35 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class LoginProv with ChangeNotifier {
-  String? email, password;
+  String? email, password, token;
 
-  LoginProv({this.email, this.password});
+  LoginProv({this.email, this.password, this.token});
 
-  Map<String, dynamic> _data = {};
-  Map<String, dynamic> get data => _data;
+  Map<String, dynamic> _dataUser = {};
+  Map<String, dynamic> get dataUser => _dataUser;
 
-  void Login(String email, String password) async {
-    var url = Uri.parse("https://api1.sib3.nurulfikri.com/api/login");
+  Future<void> login(String email, String password) async {
     try {
+      var url = Uri.parse("https://api1.sib3.nurulfikri.com/api/login");
       var response = await http.post(
         url,
-        body: json.encode(
-          {
-            "email": email,
-            "password": password,
-          },
-        ),
+        body: ({
+          "email": email,
+          "password": password,
+        }),
       );
-
-      print(json.decode(response.body));
+      var dataResponse = json.decode(response.body);
+      if (response.statusCode == 200) {
+        _dataUser = dataResponse['data'];
+        token = dataResponse['data']['token'];
+        // print(token);
+      } else {
+        print(dataResponse);
+      }
     } catch (e) {}
   }
 

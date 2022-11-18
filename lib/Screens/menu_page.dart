@@ -35,24 +35,6 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  // const MenuPage({super.key});
-  // final List<String> item = [
-  //   "T-shirt",
-  //   "T-shirt",
-  //   "T-shirt",
-  //   "T-shirt",
-  //   "T-shirt",
-  //   "T-shirt",
-  //   "T-shirt",
-  //   "T-shirt",
-  //   "T-shirt",
-  //   "T-shirt",
-  //   "T-shirt",
-  //   "T-shirt",
-  //   "T-shirt",
-  //   "T-shirt",
-  // ];
-
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -70,10 +52,8 @@ class _MenuPageState extends State<MenuPage> {
       routes: {ProductDetail.routeName: (context) => ProductDetail()},
       home: Scaffold(
         extendBody: true,
-        // primary: true,
         appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
+          elevation: 2,
           leading: Container(
             decoration: BoxDecoration(
               color: Colors.blue,
@@ -81,7 +61,7 @@ class _MenuPageState extends State<MenuPage> {
             ),
             child: IconButton(
               onPressed: () {},
-              icon: Icon(Icons.filter_list),
+              icon: const Icon(Icons.list),
             ),
           ),
           actions: [
@@ -93,21 +73,21 @@ class _MenuPageState extends State<MenuPage> {
               ),
               child: IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.search),
+                icon: const Icon(Icons.search),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 4),
               decoration: BoxDecoration(
                 color: Colors.blue,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.person),
+                icon: const Icon(Icons.person),
               ),
             ),
           ],
@@ -117,13 +97,13 @@ class _MenuPageState extends State<MenuPage> {
           child: Column(
             children: [
               // ===== MENU =====
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Expanded(
                 child: GridView.builder(
                   itemCount: productData.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, mainAxisExtent: 300),
                   itemBuilder: (context, index) {
                     return ChangeNotifierProvider.value(
