@@ -1,5 +1,8 @@
 import 'package:final_project_kel_2/Auth/login.dart';
+import 'package:final_project_kel_2/provider/signup_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -11,14 +14,18 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController username = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _handphoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordConfirmController =
       TextEditingController();
   bool _obscure = true;
-  GlobalKey<FormState> _formkey = GlobalKey();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    // ignore: non_constant_identifier_names
+    final SignupResponse = Provider.of<SignupProv>(context);
+
     Widget logo = const CircleAvatar(
       backgroundColor: Color.fromARGB(255, 104, 162, 255),
       radius: 100,
@@ -78,9 +85,41 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Column(
                   children: <Widget>[
                     TextField(
+                      controller: username,
+                      decoration: const InputDecoration(
+                          labelText: 'Name',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Serif',
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 92, 90, 90)),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 0, 12, 124)),
+                          )),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    TextField(
                       controller: _emailController,
                       decoration: const InputDecoration(
                           labelText: 'Email',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Serif',
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 92, 90, 90)),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 0, 12, 124)),
+                          )),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    TextField(
+                      controller: _handphoneController,
+                      decoration: const InputDecoration(
+                          labelText: 'Handphone',
                           labelStyle: TextStyle(
                               fontFamily: 'Serif',
                               fontWeight: FontWeight.bold,
@@ -107,7 +146,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 }
                               });
                             },
-                            icon: Icon(Icons.remove_red_eye),
+                            icon: const Icon(Icons.remove_red_eye),
                           ),
                           labelStyle: const TextStyle(
                               fontFamily: 'Serif',
@@ -136,25 +175,45 @@ class _SignUpPageState extends State<SignUpPage> {
                                 }
                               });
                             },
-                            icon: Icon(Icons.remove_red_eye),
+                            icon: const Icon(Icons.remove_red_eye),
                           ),
-                          labelStyle: TextStyle(
+                          labelStyle: const TextStyle(
                               fontFamily: 'Serif',
                               fontWeight: FontWeight.bold,
                               color: Color.fromARGB(255, 92, 90, 90)),
-                          focusedBorder: UnderlineInputBorder(
+                          focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
                                 color: Color.fromARGB(255, 0, 12, 124)),
                           )),
                       obscureText: true,
                     ),
                     const SizedBox(
-                      height: 90,
+                      height: 60,
                     ),
                     SizedBox(
                       height: 45.0,
                       child: MaterialButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          var formSignup = SignupResponse.signup(
+                              username.text,
+                              _emailController.text,
+                              _handphoneController.text,
+                              _passwordController.text,
+                              _passwordConfirmController.text);
+
+                          try {
+                            await formSignup.then((value) =>
+                                Fluttertoast.showToast(msg: 'berhasil register')
+                                    .then((value) =>
+                                        Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const LoginPage()),
+                                        )));
+                          } catch (e) {
+                            Fluttertoast.showToast(msg: e.toString());
+                          }
+                        },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(80.0)),
                         padding: const EdgeInsets.all(0.0),
@@ -184,6 +243,9 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 40,
                     ),
                   ],
                 ),

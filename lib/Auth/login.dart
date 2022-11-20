@@ -1,9 +1,10 @@
 import 'package:final_project_kel_2/Auth/signup.dart';
+import 'package:final_project_kel_2/Screens/bottomnav.dart';
 import 'package:final_project_kel_2/Screens/menu_page.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:final_project_kel_2/provider/login_provider.dart';
-import 'package:flutter_login/flutter_login.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscure = true;
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                           if (value == null || value.isEmpty) {
                             return "Please enter email";
                           }
+                          return null;
                         }),
                     const SizedBox(
                       height: 8,
@@ -139,6 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                         if (value == null || value.isEmpty) {
                           return "Please enter password";
                         }
+                        return null;
                       },
                     ),
                     const SizedBox(
@@ -167,31 +170,32 @@ class _LoginPageState extends State<LoginPage> {
                                       offset: Offset(3, 2),
                                     ),
                                   ])),
-                        )
+                        ),
                       ],
+                    ),
+                    const SizedBox(
+                      height: 30,
                     ),
                     //ini button login
                     SizedBox(
                       height: 45.0,
                       child: MaterialButton(
-                        onPressed: () {
+                        onPressed: () async {
                           var formLogin = loginResponse.login(
                               _emailController.text, _passwordController.text);
-                          // print(loginResponse.token);
-                          // var token = loginResponse.token;
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => MenuPage()),
-                            );
+
+                          try {
+                            await formLogin.then((value) =>
+                                Fluttertoast.showToast(msg: 'berhasil login')
+                                    .then((value) =>
+                                        Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  BottomNav()),
+                                        )));
+                          } catch (e) {
+                            Fluttertoast.showToast(msg: e.toString());
                           }
-                          // else {
-                          //   ScaffoldMessenger.of(context).showSnackBar(
-                          //     SnackBar(
-                          //       content: const Text('Email not found!!'),
-                          //     ),
-                          //   );
-                          // }
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(80.0)),

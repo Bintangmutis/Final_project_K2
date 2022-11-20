@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:final_project_kel_2/Auth/login.dart';
+import 'package:final_project_kel_2/Screens/bottomnav.dart';
 import 'package:final_project_kel_2/Screens/info_go_shop.dart';
 import 'package:final_project_kel_2/Screens/success_page.dart';
 import 'package:flutter/material.dart';
@@ -77,8 +78,8 @@ class Home extends StatelessWidget {
       height: 45.0,
       child: MaterialButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoginPage()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const BottomNav()));
         },
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),

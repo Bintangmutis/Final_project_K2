@@ -6,15 +6,15 @@ import 'package:final_project_kel_2/models/model.dart';
 import 'package:provider/provider.dart';
 
 class CardProduct extends StatelessWidget {
-  const CardProduct({super.key});
+  final Product product;
+  const CardProduct({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    final productData = Provider.of<Product>(context, listen: false);
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(ProductDetail.routeName,
-            arguments: productData.productId);
+        Navigator.of(context)
+            .pushNamed(ProductDetail.routeName, arguments: product.productId);
       },
       child: Card(
         color: Colors.transparent,
@@ -22,12 +22,12 @@ class CardProduct extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(productData.productImg),
+            Image.asset(product.productImg),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  productData.productName,
+                  product.productName,
                   style: TextStyle(
                     fontSize: 20.0,
                     fontFamily: 'Serif',
@@ -35,7 +35,7 @@ class CardProduct extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  productData.productPrice,
+                  product.productPrice,
                   style: TextStyle(
                     fontSize: 16.0,
                     fontFamily: 'Serif',
