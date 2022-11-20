@@ -46,7 +46,6 @@ class ProductDetail extends StatelessWidget {
                   child: Image.asset(
                     productData.productImg,
                     width: double.infinity,
-                    // fit: BoxFit.fill,
                   ),
                 ),
                 Container(
@@ -132,7 +131,7 @@ class ProductDetail extends StatelessWidget {
                   Icons.add_shopping_cart,
                 ),
               ),
-              OutlinedButton(onPressed: () {}, child: Text("Checkout")),
+              OutlinedButton(onPressed: () {}, child: const Text("Checkout")),
             ],
           ),
         ),
