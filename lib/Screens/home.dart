@@ -79,7 +79,7 @@ class Home extends StatelessWidget {
       child: MaterialButton(
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const BottomNav()));
+              MaterialPageRoute(builder: (context) => const LoginPage()));
         },
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),

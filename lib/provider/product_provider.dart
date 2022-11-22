@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:final_project_kel_2/models/model.dart';
 
 class Products with ChangeNotifier {
+  //tambahan
+  Map<String, dynamic> _token = {};
+  Map<String, dynamic> get token => _token;
+
   List<Product> listProduct = [
     Product(
       productId: "1",
