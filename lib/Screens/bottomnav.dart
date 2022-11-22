@@ -1,4 +1,4 @@
-import 'package:final_project_kel_2/Screens/info_go_shop.dart';
+import 'package:final_project_kel_2/Screens/info.dart';
 import 'package:final_project_kel_2/Screens/menu_page.dart';
 import 'package:final_project_kel_2/Screens/product_detail.dart';
 import 'package:flutter/material.dart';

@@ -1,3 +1,5 @@
+import 'package:final_project_kel_2/Screens/bottomnav.dart';
+import 'package:final_project_kel_2/Screens/menu_page.dart';
 import 'package:flutter/material.dart';
 
 class Success extends StatelessWidget {
@@ -19,7 +21,10 @@ class Success extends StatelessWidget {
     Widget button = SizedBox(
       height: 45.0,
       child: MaterialButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const BottomNav()));
+        },
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
         padding: const EdgeInsets.all(0.0),
@@ -61,8 +66,8 @@ class Success extends StatelessWidget {
               const Color.fromARGB(255, 133, 180, 255),
               Colors.grey.shade300
             ])),
-        child: ListView(
-          padding: const EdgeInsets.only(top: 120.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(child: check),
             const SizedBox(height: 30),
@@ -73,11 +78,25 @@ class Success extends StatelessWidget {
                   fontSize: 20,
                   fontFamily: 'Serif',
                   fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 0, 73, 220),
+                  color: Color.fromARGB(255, 18, 97, 255),
                 ),
               ),
             ),
-            const SizedBox(height: 260),
+            const SizedBox(
+              height: 15,
+            ),
+            const Center(
+              child: Text(
+                'Terimakasih telah berbelanja di GO-SHOP',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontFamily: 'Serif',
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 18, 97, 255),
+                ),
+              ),
+            ),
+            const SizedBox(height: 40),
             Center(
               child: button,
             )
