@@ -1,3 +1,4 @@
+import 'package:final_project_kel_2/Screens/userProfile.dart';
 import 'package:final_project_kel_2/models/model.dart';
 import 'package:final_project_kel_2/provider/card_product.dart';
 import 'package:final_project_kel_2/provider/product_provider.dart';
@@ -51,7 +52,12 @@ class _MenuPageState extends State<MenuPage> {
               borderRadius: BorderRadius.circular(8),
             ),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const userProfile()));
+              },
               icon: const Icon(Icons.person),
             ),
           ),

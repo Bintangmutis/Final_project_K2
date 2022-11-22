@@ -46,6 +46,7 @@ dependencies:
   getwidget: ^3.0.1
   font_awesome_flutter: ^10.2.1
   fluttertoast: ^8.1.1
+  url_launcher: ^6.1.7
 
 dev_dependencies:
   flutter_test:

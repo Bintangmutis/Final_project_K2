@@ -23,7 +23,9 @@ class LoginProv with ChangeNotifier {
     if (response.statusCode == 200) {
       _dataUser = dataResponse['data'];
       token = dataResponse['data']['token'];
-      return UserModel.fromJson(jsonDecode(response.body));
+      user = UserModel.fromJson(jsonDecode(response.body));
+      notifyListeners();
+      return '';
     }
     return throw json.decode(response.body)['info'];
   }

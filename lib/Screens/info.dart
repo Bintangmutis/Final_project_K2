@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Info extends StatelessWidget {
   const Info({super.key});
@@ -70,7 +71,9 @@ class Info extends StatelessWidget {
             blurRadius: 2,
             offset: Offset(4, 3), // Shadow position
           ),
-          onPressed: () {},
+          onPressed: () {
+            launchUrl(Uri.parse(''));
+          },
           text: "Facebook",
           textColor: Colors.black,
           icon: const Icon(Icons.facebook),

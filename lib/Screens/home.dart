@@ -1,8 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:final_project_kel_2/Auth/login.dart';
-import 'package:final_project_kel_2/Screens/bottomnav.dart';
-import 'package:final_project_kel_2/Screens/info_go_shop.dart';
-import 'package:final_project_kel_2/Screens/success_page.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -31,9 +28,9 @@ class Home extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
-          'Selamat Datang ',
+          'Selamat Datang di ',
           style: TextStyle(
-            fontSize: 25.0,
+            fontSize: 20.0,
             fontFamily: 'Serif',
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -47,7 +44,7 @@ class Home extends StatelessWidget {
               ColorizeAnimatedText("GO-SHOP",
                   textStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 30.0,
+                    fontSize: 25.0,
                     fontFamily: 'Serif',
                   ),
                   colors: colorizeColors)
@@ -60,7 +57,7 @@ class Home extends StatelessWidget {
     Widget desc = DefaultTextStyle(
       style: const TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 13.5,
+        fontSize: 12.5,
         fontFamily: 'Serif',
         color: Color.fromARGB(255, 255, 255, 255),
       ),

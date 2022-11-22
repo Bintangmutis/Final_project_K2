@@ -1,6 +1,5 @@
 import 'package:final_project_kel_2/Auth/signup.dart';
 import 'package:final_project_kel_2/Screens/bottomnav.dart';
-import 'package:final_project_kel_2/Screens/menu_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -81,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             Center(child: logo),
             const SizedBox(
-              height: 8,
+              height: 40,
             ),
             Container(
               padding: const EdgeInsets.only(top: 8, left: 20, right: 30),
@@ -92,16 +91,20 @@ class _LoginPageState extends State<LoginPage> {
                     TextFormField(
                         controller: _emailController,
                         decoration: const InputDecoration(
-                          labelText: 'Email',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Serif',
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 92, 90, 90)),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 12, 124)),
-                          ),
-                        ),
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromARGB(255, 0, 110, 255),
+                                    width: 1.0)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromARGB(255, 0, 110, 255),
+                                    width: 1.0)),
+                            hintText: 'Email',
+                            hintStyle: TextStyle(
+                              fontFamily: "Serif",
+                            ),
+                            prefixIcon: Icon(Icons.person,
+                                color: Color.fromARGB(255, 0, 110, 255))),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Please enter email";
@@ -115,7 +118,20 @@ class _LoginPageState extends State<LoginPage> {
                       controller: _passwordController,
                       obscureText: _obscure,
                       decoration: InputDecoration(
-                        labelText: 'Password',
+                        border: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 0, 110, 255),
+                                width: 1.0)),
+                        enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 0, 110, 255),
+                                width: 1.0)),
+                        hintText: 'Password',
+                        hintStyle: const TextStyle(
+                          fontFamily: "Serif",
+                        ),
+                        prefixIcon: const Icon(Icons.lock,
+                            color: Color.fromARGB(255, 0, 110, 255)),
                         suffixIcon: IconButton(
                           onPressed: () {
                             setState(() {
@@ -127,14 +143,6 @@ class _LoginPageState extends State<LoginPage> {
                             });
                           },
                           icon: const Icon(Icons.remove_red_eye),
-                        ),
-                        labelStyle: const TextStyle(
-                            fontFamily: 'Serif',
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 92, 90, 90)),
-                        focusedBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 0, 12, 124)),
                         ),
                       ),
                       validator: (value) {
@@ -148,33 +156,8 @@ class _LoginPageState extends State<LoginPage> {
                       height: 16,
                     ),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const SignUpPage()));
-                          },
-                          child: const Text('Sign Up',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 0, 47, 200),
-                                  fontFamily: 'Serif',
-                                  fontWeight: FontWeight.bold,
-                                  shadows: [
-                                    Shadow(
-                                      color: Color.fromARGB(255, 91, 168, 255),
-                                      blurRadius: 10.0,
-                                      offset: Offset(3, 2),
-                                    ),
-                                  ])),
-                        ),
-                      ],
-                    ),
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     //ini button login
                     SizedBox(
@@ -191,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                                         Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  BottomNav()),
+                                                  const BottomNav()),
                                         )));
                           } catch (e) {
                             Fluttertoast.showToast(msg: e.toString());
@@ -227,7 +210,38 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    //ini batas column
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text(
+                          'Belum Punya Akun? ',
+                          style: TextStyle(
+                            fontFamily: "Serif",
+                          ),
+                        ),
+                        const SizedBox(width: 1.0),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SignUpPage()));
+                          },
+                          child: const Center(
+                            child: Text('Register Sekarang',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "Serif",
+                                  color: Color.fromARGB(255, 68, 85, 195),
+                                )),
+                          ),
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),

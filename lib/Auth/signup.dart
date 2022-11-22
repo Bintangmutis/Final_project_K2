@@ -78,117 +78,137 @@ class _SignUpPageState extends State<SignUpPage> {
             children: <Widget>[
               Center(child: logo),
               const SizedBox(
-                height: 8,
+                height: 30,
               ),
               Container(
                 padding: const EdgeInsets.only(top: 8, left: 20, right: 30),
                 child: Column(
                   children: <Widget>[
-                    TextField(
+                    TextFormField(
                       controller: username,
                       decoration: const InputDecoration(
-                          labelText: 'Name',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Serif',
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 92, 90, 90)),
-                          focusedBorder: UnderlineInputBorder(
+                        border: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 12, 124)),
-                          )),
+                                color: Color.fromARGB(255, 0, 110, 255),
+                                width: 1.0)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 0, 110, 255),
+                                width: 1.0)),
+                        hintText: 'Name',
+                        hintStyle: TextStyle(
+                          fontFamily: "Serif",
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 8,
                     ),
-                    TextField(
+                    TextFormField(
                       controller: _emailController,
                       decoration: const InputDecoration(
-                          labelText: 'Email',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Serif',
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 92, 90, 90)),
-                          focusedBorder: UnderlineInputBorder(
+                        border: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 12, 124)),
-                          )),
+                                color: Color.fromARGB(255, 0, 110, 255),
+                                width: 1.0)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 0, 110, 255),
+                                width: 1.0)),
+                        hintText: 'Email',
+                        hintStyle: TextStyle(
+                          fontFamily: "Serif",
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 8,
                     ),
-                    TextField(
+                    TextFormField(
                       controller: _handphoneController,
                       decoration: const InputDecoration(
-                          labelText: 'Handphone',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Serif',
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 92, 90, 90)),
-                          focusedBorder: UnderlineInputBorder(
+                        border: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 12, 124)),
-                          )),
+                                color: Color.fromARGB(255, 0, 110, 255),
+                                width: 1.0)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 0, 110, 255),
+                                width: 1.0)),
+                        hintText: 'Handphone',
+                        hintStyle: TextStyle(
+                          fontFamily: "Serif",
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 8,
                     ),
-                    TextField(
+                    TextFormField(
                       controller: _passwordController,
+                      obscureText: _obscure,
                       decoration: InputDecoration(
-                          labelText: 'Password',
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                if (_obscure) {
-                                  _obscure = false;
-                                } else {
-                                  _obscure = true;
-                                }
-                              });
-                            },
-                            icon: const Icon(Icons.remove_red_eye),
-                          ),
-                          labelStyle: const TextStyle(
-                              fontFamily: 'Serif',
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 92, 90, 90)),
-                          focusedBorder: const UnderlineInputBorder(
+                        border: const OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 12, 124)),
-                          )),
-                      obscureText: true,
+                                color: Color.fromARGB(255, 0, 110, 255),
+                                width: 1.0)),
+                        enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 0, 110, 255),
+                                width: 1.0)),
+                        hintText: 'Password',
+                        hintStyle: const TextStyle(
+                          fontFamily: "Serif",
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              if (_obscure) {
+                                _obscure = false;
+                              } else {
+                                _obscure = true;
+                              }
+                            });
+                          },
+                          icon: const Icon(Icons.remove_red_eye),
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    TextField(
+                    TextFormField(
                       controller: _passwordConfirmController,
+                      obscureText: _obscure,
                       decoration: InputDecoration(
-                          labelText: 'Confirm Password',
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                if (_obscure) {
-                                  _obscure = false;
-                                } else {
-                                  _obscure = true;
-                                }
-                              });
-                            },
-                            icon: const Icon(Icons.remove_red_eye),
-                          ),
-                          labelStyle: const TextStyle(
-                              fontFamily: 'Serif',
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 92, 90, 90)),
-                          focusedBorder: const UnderlineInputBorder(
+                        border: const OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 12, 124)),
-                          )),
-                      obscureText: true,
+                                color: Color.fromARGB(255, 0, 110, 255),
+                                width: 1.0)),
+                        enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 0, 110, 255),
+                                width: 1.0)),
+                        hintText: 'Confirm Password',
+                        hintStyle: const TextStyle(
+                          fontFamily: "Serif",
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              if (_obscure) {
+                                _obscure = false;
+                              } else {
+                                _obscure = true;
+                              }
+                            });
+                          },
+                          icon: const Icon(Icons.remove_red_eye),
+                        ),
+                      ),
                     ),
                     const SizedBox(
-                      height: 60,
+                      height: 30,
                     ),
                     SizedBox(
                       height: 45.0,
