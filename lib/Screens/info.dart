@@ -72,7 +72,7 @@ class Info extends StatelessWidget {
             offset: Offset(4, 3), // Shadow position
           ),
           onPressed: () {
-            launchUrl(Uri.parse(''));
+            launchUrl(Uri.parse('https://www.facebook.com/ShopatGOSHOP/'));
           },
           text: "Facebook",
           textColor: Colors.black,
@@ -90,7 +90,9 @@ class Info extends StatelessWidget {
             offset: Offset(4, 3), // Shadow position
           ),
           color: Colors.blue.shade200,
-          onPressed: () {},
+          onPressed: () {
+            launchUrl(Uri.parse('https://twitter.com/shopatgoshop'));
+          },
           text: "Twitter",
           textColor: Colors.black,
           icon: const Icon(FontAwesomeIcons.twitter),
@@ -105,7 +107,10 @@ class Info extends StatelessWidget {
             blurRadius: 2,
             offset: Offset(4, 3), // Shadow position
           ),
-          onPressed: () {},
+          onPressed: () {
+            launchUrl(
+                Uri.parse('https://www.instagram.com/shopatgoshop/?hl=en'));
+          },
           text: "Instagram",
           textColor: Colors.black,
           icon: const Icon(

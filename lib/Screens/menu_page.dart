@@ -1,3 +1,4 @@
+import 'package:final_project_kel_2/Screens/info.dart';
 import 'package:final_project_kel_2/Screens/userProfile.dart';
 import 'package:final_project_kel_2/models/model.dart';
 import 'package:final_project_kel_2/provider/card_product.dart';
@@ -21,18 +22,55 @@ class _MenuPageState extends State<MenuPage> {
       appBar: AppBar(
         elevation: 2,
         leading: Container(
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.list),
-          ),
-        ),
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 71, 147, 248),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: PopupMenuButton(
+              itemBuilder: (context) {
+                return [
+                  const PopupMenuItem<int>(
+                    value: 0,
+                    child: Text(
+                      "Kategori 1",
+                      style: TextStyle(
+                          fontFamily: 'serif', fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const PopupMenuItem<int>(
+                    value: 1,
+                    child: Text(
+                      "Kategori 2",
+                      style: TextStyle(
+                          fontFamily: 'serif', fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const PopupMenuItem<int>(
+                    value: 2,
+                    child: Text(
+                      "Kategori 3",
+                      style: TextStyle(
+                          fontFamily: 'serif', fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ];
+              },
+              onSelected: ((value) {
+                if (value == 0) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Info()));
+                } else if (value == 1) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Info()));
+                } else if (value == 2) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Info()));
+                }
+              }),
+            )),
         actions: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 4),
             decoration: BoxDecoration(
               color: Colors.blue,
               borderRadius: BorderRadius.circular(8),
