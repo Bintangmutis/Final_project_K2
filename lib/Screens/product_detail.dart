@@ -10,9 +10,8 @@ class ProductDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productId = ModalRoute.of(context)?.settings.arguments as String;
-    final productData = Provider.of<Products>(context)
-        .listProduct
-        .firstWhere((product_id) => product_id.productId == productId);
+    final productData = Provider.of<Products>(context).listProduct.firstWhere(
+        (product_id) => product_id.productData.productDetail.id == productId);
     String _textLorem = lorem(words: 30);
     return MaterialApp(
       home: Scaffold(
@@ -44,7 +43,7 @@ class ProductDetail extends StatelessWidget {
                   width: double.infinity,
                   height: 300,
                   child: Image.asset(
-                    productData.productImg,
+                    productData.productData.productDetail.img,
                     width: double.infinity,
                   ),
                 ),
@@ -57,7 +56,7 @@ class ProductDetail extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            productData.productName,
+                            productData.productData.productDetail.name,
                             style: const TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.w300,
@@ -67,7 +66,8 @@ class ProductDetail extends StatelessWidget {
                           Column(
                             children: [
                               Text(
-                                productData.productPrice,
+                                productData.productData.productDetail.price
+                                    .toString(),
                                 style: const TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.w300,

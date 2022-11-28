@@ -1,5 +1,5 @@
 import 'package:final_project_kel_2/Screens/userProfile.dart';
-import 'package:final_project_kel_2/models/model.dart';
+import 'package:final_project_kel_2/models/productmodel.dart';
 import 'package:final_project_kel_2/provider/card_product.dart';
 import 'package:final_project_kel_2/provider/product_provider.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -76,14 +76,12 @@ class _MenuPageState extends State<MenuPage> {
                 builder: (context, product, _) => GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: product.listProduct.length,
+                  itemCount: 10,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, mainAxisExtent: 300),
                   itemBuilder: (context, index) {
-                    final data = product.listProduct[index];
-                    return CardProduct(
-                      product: data,
-                    );
+                    // final data = product.listProduct[index];
+                    return CardProduct();
                   },
                 ),
               ),
