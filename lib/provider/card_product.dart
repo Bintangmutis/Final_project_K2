@@ -6,9 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:final_project_kel_2/provider/login_provider.dart';
 
 class CardProduct extends StatelessWidget {
-  const CardProduct({
-    super.key,
-  });
+  const CardProduct({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +14,7 @@ class CardProduct extends StatelessWidget {
       builder: (context, produk, child) => GestureDetector(
         onTap: () {
           Navigator.of(context).pushNamed(ProductDetail.routeName,
-              arguments: produk.productModel.productData.productDetail.id);
+              arguments: produk.productModel.productData);
         },
         child: Card(
           color: Colors.transparent,
@@ -24,12 +22,12 @@ class CardProduct extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(produk.productModel.productData.productDetail.img),
+              Image.network(produk.productModel.productData.toString()),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    produk.productModel.productData.productDetail.name,
+                    produk.productModel.productData.toString(),
                     style: TextStyle(
                       fontSize: 20.0,
                       fontFamily: 'Serif',
@@ -37,8 +35,7 @@ class CardProduct extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    produk.productModel.productData.productDetail.price
-                        .toString(),
+                    produk.productModel.productData.toString(),
                     style: TextStyle(
                       fontSize: 16.0,
                       fontFamily: 'Serif',
@@ -52,5 +49,24 @@ class CardProduct extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class CardProductData extends ChangeNotifier {
+  final ProductApi productApi = ProductApi();
+  final List<ProductData> _productData = [];
+  List<ProductData> get productData => _productData;
+
+  void fetchAllProduct() async {
+    final List<ProductData> products = await productApi.getProduct();
+    try {
+      for (var i in products) {
+        if (i.category.name == 'ini_nama_category' &&
+            !productData.contains(i)) {
+          _productData.add(i);
+          notifyListeners();
+        }
+      }
+    } catch (e) {}
   }
 }

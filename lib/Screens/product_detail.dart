@@ -10,8 +10,8 @@ class ProductDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productId = ModalRoute.of(context)?.settings.arguments as String;
-    final productData = Provider.of<Products>(context).listProduct.firstWhere(
-        (product_id) => product_id.productData.productDetail.id == productId);
+    // final productData = Provider.of<Products>(context).listProduct.firstWhere(
+    //     (product_id) => product_id.productData. == productId);
     String _textLorem = lorem(words: 30);
     return MaterialApp(
       home: Scaffold(
@@ -42,10 +42,10 @@ class ProductDetail extends StatelessWidget {
                   ),
                   width: double.infinity,
                   height: 300,
-                  child: Image.asset(
-                    productData.productData.productDetail.img,
-                    width: double.infinity,
-                  ),
+                  // child: Image.asset(
+                  //   productData.productData.productDetail.img,
+                  //   width: double.infinity,
+                  // ),
                 ),
                 Container(
                   padding:
@@ -56,7 +56,7 @@ class ProductDetail extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            productData.productData.productDetail.name,
+                            'ini text nama produk dari produk model',
                             style: const TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.w300,
@@ -66,8 +66,7 @@ class ProductDetail extends StatelessWidget {
                           Column(
                             children: [
                               Text(
-                                productData.productData.productDetail.price
-                                    .toString(),
+                                'ini harga dari produk model',
                                 style: const TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.w300,

@@ -110,15 +110,18 @@ class _MenuPageState extends State<MenuPage> {
               const SizedBox(
                 height: 8,
               ),
-              Consumer<Products>(
+              Consumer<List<ProductData>>(
                 builder: (context, product, _) => GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 10,
+                  itemCount: product.length < 2 ? product.length : 2,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, mainAxisExtent: 300),
+                    crossAxisCount: 2,
+                    childAspectRatio: 1 / 1.5,
+                    mainAxisExtent: 300,
+                  ),
                   itemBuilder: (context, index) {
-                    // final data = product.listProduct[index];
+                    final data = product[index];
                     return CardProduct();
                   },
                 ),
