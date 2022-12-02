@@ -15,7 +15,7 @@ class ProductModel {
       );
 }
 
-class ProductData extends ChangeNotifier {
+class ProductData {
   final int id;
   final String name;
   final String img;

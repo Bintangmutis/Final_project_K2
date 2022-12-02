@@ -55,19 +55,19 @@ class ProductDetail extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             'ini text nama produk dari produk model',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.w300,
                               fontFamily: "Serif",
                             ),
                           ),
                           Column(
-                            children: [
+                            children: const [
                               Text(
                                 'ini harga dari produk model',
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.w300,
                                   fontFamily: "Serif",

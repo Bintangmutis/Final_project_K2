@@ -65,6 +65,9 @@ class _MenuPageState extends State<MenuPage> {
                 } else if (value == 2) {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Info()));
+                } else if (value == 3) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Info()));
                 }
               }),
             )),
@@ -110,25 +113,53 @@ class _MenuPageState extends State<MenuPage> {
               const SizedBox(
                 height: 8,
               ),
-              Consumer<List<ProductData>>(
-                builder: (context, product, _) => GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: product.length < 2 ? product.length : 2,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1 / 1.5,
-                    mainAxisExtent: 300,
-                  ),
-                  itemBuilder: (context, index) {
-                    final data = product[index];
-                    return CardProduct();
-                  },
-                ),
-              ),
+              _fetchProduct(),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _fetchProduct() {
+    return Consumer<CardProductData>(
+      builder: (context, product, _) =>
+          GridViewMenuPage(product: product.productData),
+    );
+  }
+}
+
+class GridViewMenuPage extends StatelessWidget {
+  final List<ProductData> product;
+  const GridViewMenuPage({
+    super.key,
+    required this.product,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          // ===== MENU =====
+          const SizedBox(
+            height: 8,
+          ),
+          GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: product.length < 2 ? product.length : 2,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1 / 1.5,
+              mainAxisExtent: 300,
+            ),
+            itemBuilder: (context, index) {
+              final data = product[index];
+              return CardProduct();
+            },
+          ),
+        ],
       ),
     );
   }

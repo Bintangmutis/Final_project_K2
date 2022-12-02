@@ -10,11 +10,11 @@ class CardProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProductApi>(
+    return Consumer<CardProductData>(
       builder: (context, produk, child) => GestureDetector(
         onTap: () {
           Navigator.of(context).pushNamed(ProductDetail.routeName,
-              arguments: produk.productModel.productData);
+              arguments: produk.productData);
         },
         child: Card(
           color: Colors.transparent,
@@ -22,21 +22,21 @@ class CardProduct extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(produk.productModel.productData.toString()),
+              Image.network(produk.productData.toString()),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    produk.productModel.productData.toString(),
-                    style: TextStyle(
+                    produk.productData.toString(),
+                    style: const TextStyle(
                       fontSize: 20.0,
                       fontFamily: 'Serif',
                       color: Color.fromARGB(255, 62, 65, 102),
                     ),
                   ),
                   Text(
-                    produk.productModel.productData.toString(),
-                    style: TextStyle(
+                    produk.productData.toString(),
+                    style: const TextStyle(
                       fontSize: 16.0,
                       fontFamily: 'Serif',
                       color: Color.fromARGB(255, 62, 65, 102),
@@ -61,8 +61,7 @@ class CardProductData extends ChangeNotifier {
     final List<ProductData> products = await productApi.getProduct();
     try {
       for (var i in products) {
-        if (i.category.name == 'ini_nama_category' &&
-            !productData.contains(i)) {
+        if (i.category.name == 'k-4-1_featured' && !productData.contains(i)) {
           _productData.add(i);
           notifyListeners();
         }
