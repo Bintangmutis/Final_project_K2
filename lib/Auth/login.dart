@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
       '/signup': (BuildContext context) => const SignUpPage()
     };
     Widget logo = const CircleAvatar(
-      backgroundColor: Color.fromARGB(255, 104, 162, 255),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       radius: 100,
       child: CircleAvatar(
         radius: 95,
@@ -90,20 +90,22 @@ class _LoginPageState extends State<LoginPage> {
                   children: <Widget>[
                     TextFormField(
                         controller: _emailController,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.blue.shade200,
                             border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(50.0),
                                 borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 0, 110, 255),
-                                    width: 1.0)),
+                                    color: Colors.blue.shade200, width: 1.0)),
                             enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(50.0),
                                 borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 0, 110, 255),
-                                    width: 1.0)),
+                                    color: Colors.blue.shade100, width: 1.0)),
                             hintText: 'Email',
-                            hintStyle: TextStyle(
+                            hintStyle: const TextStyle(
                               fontFamily: "Serif",
                             ),
-                            prefixIcon: Icon(Icons.person,
+                            prefixIcon: const Icon(Icons.person,
                                 color: Color.fromARGB(255, 0, 110, 255))),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -118,14 +120,16 @@ class _LoginPageState extends State<LoginPage> {
                       controller: _passwordController,
                       obscureText: _obscure,
                       decoration: InputDecoration(
-                        border: const OutlineInputBorder(
+                        filled: true,
+                        fillColor: Colors.blue.shade200,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50.0),
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 110, 255),
-                                width: 1.0)),
-                        enabledBorder: const OutlineInputBorder(
+                                color: Colors.blue.shade200, width: 1.0)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50.0),
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 110, 255),
-                                width: 1.0)),
+                                color: Colors.blue.shade100, width: 1.0)),
                         hintText: 'Password',
                         hintStyle: const TextStyle(
                           fontFamily: "Serif",

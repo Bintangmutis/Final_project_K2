@@ -1,6 +1,8 @@
+import 'package:final_project_kel_2/Screens/cart_screen.dart';
 import 'package:final_project_kel_2/Screens/info.dart';
 import 'package:final_project_kel_2/Screens/menu_page.dart';
 import 'package:final_project_kel_2/Screens/product_detail.dart';
+import 'package:final_project_kel_2/Screens/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../provider/product_provider.dart';
@@ -15,12 +17,8 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   final List widgetOptions = const [
     MenuPage(),
-    Text(
-      'Index 1: Business',
-    ),
-    Text(
-      'Index 2: School',
-    ),
+    WishlistScreen(),
+    CartScreen(),
     Info()
   ];
   int _selectedIndex = 0;
@@ -34,6 +32,7 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       routes: {ProductDetail.routeName: (context) => const ProductDetail()},
       home: Scaffold(
         body: widgetOptions[_selectedIndex],

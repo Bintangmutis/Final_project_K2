@@ -53,6 +53,7 @@ class _userProfileState extends State<userProfile> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: const Color.fromARGB(255, 71, 147, 248),
         shadowColor: const Color.fromARGB(255, 0, 11, 106),
         centerTitle: true,

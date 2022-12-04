@@ -86,17 +86,19 @@ class _SignUpPageState extends State<SignUpPage> {
                   children: <Widget>[
                     TextFormField(
                       controller: username,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
+                        fillColor: Colors.blue.shade200,
+                        filled: true,
                         border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50.0),
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 110, 255),
-                                width: 1.0)),
+                                color: Colors.blue.shade200, width: 1.0)),
                         enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 110, 255),
-                                width: 1.0)),
+                            borderRadius: BorderRadius.circular(50.0),
+                            borderSide: const BorderSide(
+                                color: Colors.black26, width: 1.0)),
                         hintText: 'Name',
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                           fontFamily: "Serif",
                         ),
                       ),
@@ -106,17 +108,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     TextFormField(
                       controller: _emailController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.blue.shade200,
                         border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50.0),
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 110, 255),
-                                width: 1.0)),
+                                color: Colors.blue.shade200, width: 1.0)),
                         enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 110, 255),
-                                width: 1.0)),
+                            borderRadius: BorderRadius.circular(50.0),
+                            borderSide: const BorderSide(
+                                color: Colors.black26, width: 1.0)),
                         hintText: 'Email',
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                           fontFamily: "Serif",
                         ),
                       ),
@@ -126,17 +130,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     TextFormField(
                       controller: _handphoneController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.blue.shade200,
                         border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50.0),
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 110, 255),
-                                width: 1.0)),
+                                color: Colors.blue.shade200, width: 1.0)),
                         enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 110, 255),
-                                width: 1.0)),
+                            borderRadius: BorderRadius.circular(50.0),
+                            borderSide: const BorderSide(
+                                color: Colors.black26, width: 1.0)),
                         hintText: 'Handphone',
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                           fontFamily: "Serif",
                         ),
                       ),
@@ -148,14 +154,16 @@ class _SignUpPageState extends State<SignUpPage> {
                       controller: _passwordController,
                       obscureText: _obscure,
                       decoration: InputDecoration(
-                        border: const OutlineInputBorder(
+                        fillColor: Colors.blue.shade200,
+                        filled: true,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50.0),
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 110, 255),
-                                width: 1.0)),
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 110, 255),
-                                width: 1.0)),
+                                color: Colors.blue.shade200, width: 1.0)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                            borderSide: const BorderSide(
+                                color: Colors.black26, width: 1.0)),
                         hintText: 'Password',
                         hintStyle: const TextStyle(
                           fontFamily: "Serif",
@@ -181,14 +189,16 @@ class _SignUpPageState extends State<SignUpPage> {
                       controller: _passwordConfirmController,
                       obscureText: _obscure,
                       decoration: InputDecoration(
-                        border: const OutlineInputBorder(
+                        filled: true,
+                        fillColor: Colors.blue.shade200,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50.0),
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 110, 255),
-                                width: 1.0)),
-                        enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 0, 110, 255),
-                                width: 1.0)),
+                                color: Colors.blue.shade200, width: 1.0)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                            borderSide: const BorderSide(
+                                color: Colors.black26, width: 1.0)),
                         hintText: 'Confirm Password',
                         hintStyle: const TextStyle(
                           fontFamily: "Serif",

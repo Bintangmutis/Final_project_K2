@@ -16,14 +16,99 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
+//   bool _searchBoolean = false;
+//   List<int> _searchIndexList = [];
+//   List<Product> _list = [
+//     Product(
+//       productId: "1",
+//       productImg: "images/contoh_baju.jpeg",
+//       productName: "Tshirt",
+//       productPrice: "50000",
+//     ),
+//     Product(
+//       productId: "2",
+//       productImg: "images/contoh_baju.jpeg",
+//       productName: "Sweeter",
+//       productPrice: "50000",
+//     ),
+//     Product(
+//       productId: "3",
+//       productImg: "images/contoh_baju.jpeg",
+//       productName: "Jacket",
+//       productPrice: "50000",
+//     ),
+//   ];
+
+// Widget _searchTextField() {
+//     return TextField(
+//       onChanged: (String s) {
+//         setState(() {
+//           _searchIndexList = [];
+//           for (int i = 0; i < _list.length; i++) {
+//             if (_list[i].contains(s)) {
+//               _searchIndexList.add(i);
+//             }
+//           }
+//         });
+//       },
+//       autofocus: true,
+//       cursorColor: Colors.white,
+//       style: TextStyle(
+//         color: Colors.white,
+//         fontSize: 20,
+//       ),
+//       textInputAction: TextInputAction.search,
+//       decoration: InputDecoration(
+//         enabledBorder: UnderlineInputBorder(
+//           borderSide: BorderSide(color: Colors.white)
+//         ),
+//         focusedBorder: UnderlineInputBorder(
+//           borderSide: BorderSide(color: Colors.white)
+//         ),
+//         hintText: 'Search',
+//         hintStyle: TextStyle(
+//           color: Colors.white60,
+//           fontSize: 20,
+//         ),
+//       ),
+//     );
+//   }
+
+//    Widget _searchListView() {
+//     return ListView.builder(
+//       itemCount: _searchIndexList.length,
+//       itemBuilder: (context, index) {
+//         index = _searchIndexList[index];
+//         return Card(
+//           child: ListTile(
+//             title: Text(_list[index])
+//           )
+//         );
+//       }
+//     );
+//   }
+
+//   Widget _defaultListView() {
+//     return ListView.builder(
+//       itemCount: _list.length,
+//       itemBuilder: (context, index) {
+//         return Card(
+//           child: ListTile(
+//             title: Text(_list[index])
+//           )
+//         );
+//       }
+//     );
+//   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 2,
         leading: Container(
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 71, 147, 248),
               borderRadius: BorderRadius.circular(8),
             ),
             child: PopupMenuButton(
@@ -32,7 +117,7 @@ class _MenuPageState extends State<MenuPage> {
                   const PopupMenuItem<int>(
                     value: 0,
                     child: Text(
-                      "Kategori 1",
+                      "Baju",
                       style: TextStyle(
                           fontFamily: 'serif', fontWeight: FontWeight.bold),
                     ),
@@ -40,7 +125,7 @@ class _MenuPageState extends State<MenuPage> {
                   const PopupMenuItem<int>(
                     value: 1,
                     child: Text(
-                      "Kategori 2",
+                      "Sweater",
                       style: TextStyle(
                           fontFamily: 'serif', fontWeight: FontWeight.bold),
                     ),
@@ -48,7 +133,15 @@ class _MenuPageState extends State<MenuPage> {
                   const PopupMenuItem<int>(
                     value: 2,
                     child: Text(
-                      "Kategori 3",
+                      "Celana",
+                      style: TextStyle(
+                          fontFamily: 'serif', fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const PopupMenuItem<int>(
+                    value: 3,
+                    child: Text(
+                      "Sepatu",
                       style: TextStyle(
                           fontFamily: 'serif', fontWeight: FontWeight.bold),
                     ),
@@ -65,19 +158,18 @@ class _MenuPageState extends State<MenuPage> {
                 } else if (value == 2) {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Info()));
+                } else if (value == 3) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Info()));
                 }
               }),
             )),
         actions: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 4),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(8),
-            ),
             child: IconButton(
-              onPressed: () {},
               icon: const Icon(Icons.search),
+              onPressed: () {},
             ),
           ),
           const SizedBox(
