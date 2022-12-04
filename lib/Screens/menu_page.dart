@@ -1,6 +1,6 @@
 import 'package:final_project_kel_2/Screens/info.dart';
 import 'package:final_project_kel_2/Screens/userProfile.dart';
-import 'package:final_project_kel_2/models/model.dart';
+import 'package:final_project_kel_2/models/productmodel.dart';
 import 'package:final_project_kel_2/provider/card_product.dart';
 import 'package:final_project_kel_2/provider/product_provider.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -202,24 +202,53 @@ class _MenuPageState extends State<MenuPage> {
               const SizedBox(
                 height: 8,
               ),
-              Consumer<Products>(
-                builder: (context, product, _) => GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: product.listProduct.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, mainAxisExtent: 300),
-                  itemBuilder: (context, index) {
-                    final data = product.listProduct[index];
-                    return CardProduct(
-                      product: data,
-                    );
-                  },
-                ),
-              ),
+              _fetchProduct(),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _fetchProduct() {
+    return Consumer<CardProductData>(
+      builder: (context, product, _) =>
+          GridViewMenuPage(product: product.productData),
+    );
+  }
+}
+
+class GridViewMenuPage extends StatelessWidget {
+  final List<ProductData> product;
+  const GridViewMenuPage({
+    super.key,
+    required this.product,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          // ===== MENU =====
+          const SizedBox(
+            height: 8,
+          ),
+          GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: product.length < 2 ? product.length : 2,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1 / 1.5,
+              mainAxisExtent: 300,
+            ),
+            itemBuilder: (context, index) {
+              final data = product[index];
+              return CardProduct();
+            },
+          ),
+        ],
       ),
     );
   }
