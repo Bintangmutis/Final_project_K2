@@ -53,13 +53,13 @@ class ProductDetail extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   child: Column(
                     children: [
-                      Row(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             product.name,
                             style: const TextStyle(
-                              fontSize: 28,
+                              fontSize: 20,
                             ),
                           ),
                           Text(

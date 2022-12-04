@@ -181,26 +181,26 @@ class _MenuPageState extends State<MenuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const CategoryScreen(
-                              categoryName: "k-4-1_gadget")));
+                          builder: (context) =>
+                              const CategoryScreen(categoryName: "k2_baju")));
                 } else if (value == 1) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const CategoryScreen(
-                              categoryName: "k-4-1_featured")));
+                              categoryName: "k2_sweater")));
                 } else if (value == 2) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const CategoryScreen(
-                              categoryName: "k-4-1_bestseller")));
+                          builder: (context) =>
+                              const CategoryScreen(categoryName: "k2_celana")));
                 } else if (value == 3) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const CategoryScreen(
-                              categoryName: "k-4-1_toprated")));
+                          builder: (context) =>
+                              const CategoryScreen(categoryName: "k2_sepatu")));
                 }
               }),
             )),
@@ -233,17 +233,33 @@ class _MenuPageState extends State<MenuPage> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              // ===== MENU =====
-              const SizedBox(
-                height: 8,
-              ),
-              _listOfProducts(),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            stops: const [
+              0.4,
+              0.9,
             ],
+            colors: [
+              const Color.fromARGB(255, 133, 180, 255),
+              Colors.grey.shade300
+            ],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // ===== MENU =====
+                const SizedBox(
+                  height: 8,
+                ),
+                _listOfProducts(),
+              ],
+            ),
           ),
         ),
       ),
@@ -255,17 +271,17 @@ class _MenuPageState extends State<MenuPage> {
       builder: (context, product, _) => Column(
         children: [
           const SizedBox(
-            height: 8,
+            height: 10,
           ),
           GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: product.listProduct.length,
+            itemCount: product.listProductByCategory.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
             ),
             itemBuilder: (context, index) {
-              final data = product.listProduct[index];
+              final data = product.listProductByCategory[index];
               return _cardProduct(data, context);
             },
           ),
@@ -288,7 +304,7 @@ Widget _cardProduct(ProductModel product, BuildContext context) {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 90,
+            height: 110,
             width: MediaQuery.of(context).size.width,
             child: CachedNetworkImage(
               imageUrl: product.img,
