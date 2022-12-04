@@ -24,8 +24,8 @@ class _CartScreenState extends State<CartScreen> {
         padding: const EdgeInsets.all(0.0),
         child: Ink(
           decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color.fromARGB(255, 68, 85, 195), Color(0xff64B6FF)],
+              gradient: LinearGradient(
+                colors: [Colors.blue.shade700, Colors.blue.shade200],
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
               ),
@@ -34,7 +34,7 @@ class _CartScreenState extends State<CartScreen> {
             constraints: const BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
             alignment: Alignment.center,
             child: const Text(
-              "Continue",
+              "CHECKOUT",
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.white,
