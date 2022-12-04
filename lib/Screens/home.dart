@@ -1,11 +1,29 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:final_project_kel_2/Auth/login.dart';
+import 'package:final_project_kel_2/Screens/login.dart';
+import 'package:final_project_kel_2/view_models/user_view_model.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-// ignore: must_be_immutable
-class Home extends StatelessWidget {
-  Home({super.key});
+import '../view_models/product_view_model.dart';
+
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() {
+      Provider.of<UserViewModel>(context, listen: false).saveUserDetail();
+      Provider.of<ProductViewModel>(context, listen: false).fetchProducts();
+    });
+  }
 
   var colorizeColors = [
     const Color.fromARGB(255, 0, 140, 255),

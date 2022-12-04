@@ -1,40 +1,25 @@
-import 'package:final_project_kel_2/models/usermodel.dart';
-import 'package:flutter/cupertino.dart';
-
 class ProductModel {
-  List<ProductData> productData;
-
-  ProductModel({required this.productData});
-
-  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-        productData: json['data'] != null
-            ? (json['data'] as List)
-                .map((e) => ProductData.fromJson(e))
-                .toList()
-            : [],
-      );
-}
-
-class ProductData {
   final int id;
   final String name;
   final String img;
   final int price;
+  final String description;
   final ProductCategory category;
 
-  ProductData({
-    required this.id,
-    required this.name,
-    required this.img,
-    required this.price,
-    required this.category,
-  });
+  ProductModel(
+      {required this.id,
+      required this.name,
+      required this.img,
+      required this.price,
+      required this.category,
+      required this.description});
 
-  factory ProductData.fromJson(Map<String, dynamic> json) => ProductData(
+  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         id: json['id'],
         name: json['name'],
         img: json['image'],
         price: json['harga'],
+        description: json['deskripsi'],
         category: json['category'] != null
             ? ProductCategory.fromJson(
                 json['category'],

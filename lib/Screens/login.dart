@@ -1,9 +1,10 @@
-import 'package:final_project_kel_2/Auth/signup.dart';
 import 'package:final_project_kel_2/Screens/bottomnav.dart';
+import 'package:final_project_kel_2/Screens/signup.dart';
+import 'package:final_project_kel_2/models/login_model/login_model.dart';
+import 'package:final_project_kel_2/view_models/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:final_project_kel_2/provider/login_provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -21,8 +22,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final loginResponse = Provider.of<LoginProv>(context);
-
     <String, WidgetBuilder>{
       '/signup': (BuildContext context) => const SignUpPage()
     };
@@ -44,20 +43,21 @@ class _LoginPageState extends State<LoginPage> {
         title: const Text(
           'GO-SHOP',
           style: TextStyle(
-              fontFamily: "Serif",
-              fontWeight: FontWeight.bold,
-              shadows: [
-                Shadow(
-                  color: Colors.black,
-                  blurRadius: 10.0,
-                  offset: Offset(1.0, 3.0),
-                ),
-                Shadow(
-                  color: Color.fromARGB(255, 71, 147, 248),
-                  blurRadius: 10.0,
-                  offset: Offset(-5.0, 5.0),
-                ),
-              ]),
+            fontFamily: "Serif",
+            fontWeight: FontWeight.bold,
+            shadows: [
+              Shadow(
+                color: Colors.black,
+                blurRadius: 10.0,
+                offset: Offset(1.0, 3.0),
+              ),
+              Shadow(
+                color: Color.fromARGB(255, 71, 147, 248),
+                blurRadius: 10.0,
+                offset: Offset(-5.0, 5.0),
+              ),
+            ],
+          ),
         ),
       ),
       body: Container(
@@ -91,22 +91,27 @@ class _LoginPageState extends State<LoginPage> {
                     TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.blue.shade200,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                                borderSide: BorderSide(
-                                    color: Colors.blue.shade200, width: 1.0)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                                borderSide: BorderSide(
-                                    color: Colors.blue.shade100, width: 1.0)),
-                            hintText: 'Email',
-                            hintStyle: const TextStyle(
-                              fontFamily: "Serif",
-                            ),
-                            prefixIcon: const Icon(Icons.person,
-                                color: Color.fromARGB(255, 0, 110, 255))),
+                          filled: true,
+                          fillColor: Colors.blue.shade200,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                            borderSide: BorderSide(
+                                color: Colors.blue.shade200, width: 1.0),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                            borderSide: BorderSide(
+                                color: Colors.blue.shade100, width: 1.0),
+                          ),
+                          hintText: 'Email',
+                          hintStyle: const TextStyle(
+                            fontFamily: "Serif",
+                          ),
+                          prefixIcon: const Icon(
+                            Icons.person,
+                            color: Color.fromARGB(255, 0, 110, 255),
+                          ),
+                        ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Please enter email";
@@ -123,28 +128,34 @@ class _LoginPageState extends State<LoginPage> {
                         filled: true,
                         fillColor: Colors.blue.shade200,
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                            borderSide: BorderSide(
-                                color: Colors.blue.shade200, width: 1.0)),
+                          borderRadius: BorderRadius.circular(50.0),
+                          borderSide: BorderSide(
+                              color: Colors.blue.shade200, width: 1.0),
+                        ),
                         enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                            borderSide: BorderSide(
-                                color: Colors.blue.shade100, width: 1.0)),
+                          borderRadius: BorderRadius.circular(50.0),
+                          borderSide: BorderSide(
+                              color: Colors.blue.shade100, width: 1.0),
+                        ),
                         hintText: 'Password',
                         hintStyle: const TextStyle(
                           fontFamily: "Serif",
                         ),
-                        prefixIcon: const Icon(Icons.lock,
-                            color: Color.fromARGB(255, 0, 110, 255)),
+                        prefixIcon: const Icon(
+                          Icons.lock,
+                          color: Color.fromARGB(255, 0, 110, 255),
+                        ),
                         suffixIcon: IconButton(
                           onPressed: () {
-                            setState(() {
-                              if (_obscure) {
-                                _obscure = false;
-                              } else {
-                                _obscure = true;
-                              }
-                            });
+                            setState(
+                              () {
+                                if (_obscure) {
+                                  _obscure = false;
+                                } else {
+                                  _obscure = true;
+                                }
+                              },
+                            );
                           },
                           icon: const Icon(Icons.remove_red_eye),
                         ),
@@ -156,59 +167,65 @@ class _LoginPageState extends State<LoginPage> {
                         return null;
                       },
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
 
                     const SizedBox(
-                      height: 20,
+                      height: 36,
                     ),
                     //ini button login
                     SizedBox(
                       height: 45.0,
-                      child: MaterialButton(
-                        onPressed: () async {
-                          var formLogin = loginResponse.login(
-                              _emailController.text, _passwordController.text);
-
-                          try {
-                            await formLogin.then((value) =>
-                                Fluttertoast.showToast(msg: 'berhasil login')
-                                    .then((value) =>
-                                        Navigator.of(context).pushReplacement(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const BottomNav()),
-                                        )));
-                          } catch (e) {
-                            Fluttertoast.showToast(msg: e.toString());
-                          }
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: const EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 68, 85, 195),
-                                  Color(0xff64B6FF)
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
+                      child: Consumer<LoginViewModel>(
+                        builder: (context, login, _) => MaterialButton(
+                          onPressed: () async {
+                            try {
+                              await login
+                                  .postLogin(
+                                    LoginModel(
+                                        email: _emailController.text,
+                                        password: _passwordController.text),
+                                  )
+                                  .then(
+                                    (value) => Fluttertoast.showToast(
+                                            msg: 'berhasil login')
+                                        .then(
+                                      (value) =>
+                                          Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const BottomNav()),
+                                      ),
+                                    ),
+                                  );
+                            } catch (e) {
+                              Fluttertoast.showToast(msg: e.toString());
+                            }
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(80.0)),
+                          padding: const EdgeInsets.all(0.0),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 68, 85, 195),
+                                    Color(0xff64B6FF)
+                                  ],
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                ),
+                                borderRadius: BorderRadius.circular(30.0)),
+                            child: Container(
+                              constraints: const BoxConstraints(
+                                  maxWidth: 400.0, minHeight: 50.0),
+                              alignment: Alignment.center,
+                              child: const Text(
+                                "LOGIN",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Serif",
+                                    fontWeight: FontWeight.bold),
                               ),
-                              borderRadius: BorderRadius.circular(30.0)),
-                          child: Container(
-                            constraints: const BoxConstraints(
-                                maxWidth: 400.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: const Text(
-                              "LOGIN",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Serif",
-                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),

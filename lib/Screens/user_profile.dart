@@ -1,21 +1,17 @@
-// ignore: file_names
 import 'package:final_project_kel_2/Screens/bottomnav.dart';
-import 'package:final_project_kel_2/provider/api/product_api.dart';
-import 'package:final_project_kel_2/provider/login_provider.dart';
+import 'package:final_project_kel_2/view_models/user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-// ignore: camel_case_types
-class userProfile extends StatefulWidget {
-  const userProfile({super.key});
+class UserProfile extends StatefulWidget {
+  const UserProfile({super.key});
 
   @override
-  State<userProfile> createState() => _userProfileState();
+  State<UserProfile> createState() => _UserProfileState();
 }
 
-// ignore: camel_case_types
-class _userProfileState extends State<userProfile> {
+class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
     Widget button = SizedBox(
@@ -93,7 +89,7 @@ class _userProfileState extends State<userProfile> {
           ),
         ),
         child: SafeArea(
-            child: Consumer<LoginProv>(
+            child: Consumer<UserViewModel>(
           builder: (context, login, _) => Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -105,15 +101,15 @@ class _userProfileState extends State<userProfile> {
                 height: 10,
               ),
               Text(
-                login.user.userData.userDetail.name,
+                login.user.name,
                 style: const TextStyle(
                     fontFamily: 'serif',
                     fontWeight: FontWeight.bold,
                     fontSize: 30.0),
               ),
-              Text(
-                login.user.userData.userDetail.role,
-                style: const TextStyle(
+              const Text(
+                "User",
+                style: TextStyle(
                     fontFamily: 'serif',
                     fontWeight: FontWeight.bold,
                     fontSize: 15.0,
@@ -136,7 +132,7 @@ class _userProfileState extends State<userProfile> {
                     FontAwesomeIcons.solidIdCard,
                     color: Color.fromARGB(255, 133, 180, 255),
                   ),
-                  title: Text(login.user.userData.userDetail.id.toString()),
+                  title: Text(login.user.id.toString()),
                 ),
               ),
               Card(
@@ -153,7 +149,7 @@ class _userProfileState extends State<userProfile> {
                     Icons.email_rounded,
                     color: Color.fromARGB(255, 133, 180, 255),
                   ),
-                  title: Text(login.user.userData.userDetail.email),
+                  title: Text(login.user.email),
                 ),
               ),
               Card(
@@ -170,7 +166,7 @@ class _userProfileState extends State<userProfile> {
                     FontAwesomeIcons.squarePhone,
                     color: Color.fromARGB(255, 133, 180, 255),
                   ),
-                  title: Text(login.user.userData.userDetail.handphone),
+                  title: Text(login.user.handphone),
                 ),
               ),
               const SizedBox(

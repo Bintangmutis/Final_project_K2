@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WishlistScreen extends StatefulWidget {
   const WishlistScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _WishlistScreenState createState() => _WishlistScreenState();
+  State<WishlistScreen> createState() => _WishlistScreenState();
 }
 
 class _WishlistScreenState extends State<WishlistScreen> {

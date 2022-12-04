@@ -1,10 +1,9 @@
-import 'package:final_project_kel_2/Screens/info.dart';
-import 'package:final_project_kel_2/Screens/userProfile.dart';
-import 'package:final_project_kel_2/models/productmodel.dart';
-import 'package:final_project_kel_2/provider/card_product.dart';
-import 'package:final_project_kel_2/provider/product_provider.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:final_project_kel_2/Screens/category_screen.dart';
+import 'package:final_project_kel_2/Screens/product_detail.dart';
+import 'package:final_project_kel_2/Screens/user_profile.dart';
+import 'package:final_project_kel_2/models/product_model/productmodel.dart';
+import 'package:final_project_kel_2/view_models/product_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -102,6 +101,16 @@ class _MenuPageState extends State<MenuPage> {
 //   }
 
   @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(
+      () => Provider.of<ProductViewModel>(context, listen: false)
+          .fetchProductByCategoryName("k2"),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -169,17 +178,29 @@ class _MenuPageState extends State<MenuPage> {
               },
               onSelected: ((value) {
                 if (value == 0) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Info()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CategoryScreen(
+                              categoryName: "k-4-1_gadget")));
                 } else if (value == 1) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Info()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CategoryScreen(
+                              categoryName: "k-4-1_featured")));
                 } else if (value == 2) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Info()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CategoryScreen(
+                              categoryName: "k-4-1_bestseller")));
                 } else if (value == 3) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Info()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CategoryScreen(
+                              categoryName: "k-4-1_toprated")));
                 }
               }),
             )),
@@ -203,16 +224,16 @@ class _MenuPageState extends State<MenuPage> {
             child: IconButton(
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const userProfile()));
+                  context,
+                  MaterialPageRoute(builder: (context) => const UserProfile()),
+                );
               },
               icon: const Icon(Icons.person),
             ),
           ),
         ],
       ),
-      body: Container(
+      body: Padding(
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
           child: Column(
@@ -221,7 +242,7 @@ class _MenuPageState extends State<MenuPage> {
               const SizedBox(
                 height: 8,
               ),
-              _fetchProduct(),
+              _listOfProducts(),
             ],
           ),
         ),
@@ -229,46 +250,77 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 
-  Widget _fetchProduct() {
-    return Consumer<CardProductData>(
-      builder: (context, product, _) =>
-          GridViewMenuPage(product: product.productData),
-    );
-  }
-}
-
-class GridViewMenuPage extends StatelessWidget {
-  final List<ProductData> product;
-  const GridViewMenuPage({
-    super.key,
-    required this.product,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
+  Widget _listOfProducts() {
+    return Consumer<ProductViewModel>(
+      builder: (context, product, _) => Column(
         children: [
-          // ===== MENU =====
           const SizedBox(
             height: 8,
           ),
           GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: product.length < 2 ? product.length : 2,
+            itemCount: product.listProduct.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: 1 / 1.5,
-              mainAxisExtent: 300,
             ),
             itemBuilder: (context, index) {
-              final data = product[index];
-              return CardProduct();
+              final data = product.listProduct[index];
+              return _cardProduct(data, context);
             },
           ),
         ],
       ),
     );
   }
+}
+
+Widget _cardProduct(ProductModel product, BuildContext context) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => ProductDetail(product: product)));
+    },
+    child: Card(
+      color: Colors.transparent,
+      elevation: 0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 90,
+            width: MediaQuery.of(context).size.width,
+            child: CachedNetworkImage(
+              imageUrl: product.img,
+              errorWidget: (context, url, error) => const Icon(
+                Icons.error,
+                color: Colors.red,
+              ),
+              fit: BoxFit.fill,
+              placeholder: (context, url) => const CircularProgressIndicator(),
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                product.name.toString(),
+                style: const TextStyle(
+                  fontSize: 20.0,
+                  color: Color.fromARGB(255, 62, 65, 102),
+                ),
+              ),
+              Text(
+                product.price.toString(),
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  color: Color.fromARGB(255, 62, 65, 102),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
 }

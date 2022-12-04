@@ -1,5 +1,4 @@
 import 'package:final_project_kel_2/Screens/bottomnav.dart';
-import 'package:final_project_kel_2/Screens/menu_page.dart';
 import 'package:flutter/material.dart';
 
 class Success extends StatelessWidget {

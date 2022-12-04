@@ -1,5 +1,6 @@
-import 'package:final_project_kel_2/Auth/login.dart';
-import 'package:final_project_kel_2/provider/signup_provider.dart';
+import 'package:final_project_kel_2/Screens/login.dart';
+import 'package:final_project_kel_2/models/register_model/register_model.dart';
+import 'package:final_project_kel_2/view_models/register_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,13 +20,9 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passwordConfirmController =
       TextEditingController();
   bool _obscure = true;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    // ignore: non_constant_identifier_names
-    final SignupResponse = Provider.of<SignupProv>(context);
-
     Widget logo = const CircleAvatar(
       backgroundColor: Color.fromARGB(255, 104, 162, 255),
       radius: 100,
@@ -222,53 +219,60 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     SizedBox(
                       height: 45.0,
-                      child: MaterialButton(
-                        onPressed: () async {
-                          var formSignup = SignupResponse.signup(
-                              username.text,
-                              _emailController.text,
-                              _handphoneController.text,
-                              _passwordController.text,
-                              _passwordConfirmController.text);
-
-                          try {
-                            await formSignup.then((value) =>
-                                Fluttertoast.showToast(msg: 'berhasil register')
-                                    .then((value) =>
-                                        Navigator.of(context).pushReplacement(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const LoginPage()),
-                                        )));
-                          } catch (e) {
-                            Fluttertoast.showToast(msg: e.toString());
-                          }
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0)),
-                        padding: const EdgeInsets.all(0.0),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 68, 85, 195),
-                                  Color(0xff64B6FF)
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
+                      child: Consumer<RegisterViewModel>(
+                        builder: (context, register, _) => MaterialButton(
+                          onPressed: () async {
+                            try {
+                              await register
+                                  .postRegister(RegisterModel(
+                                      email: _emailController.text,
+                                      handphone: _handphoneController.text,
+                                      name: username.text,
+                                      password: _passwordController.text,
+                                      rePassword:
+                                          _passwordConfirmController.text))
+                                  .then(
+                                    (value) => Fluttertoast.showToast(
+                                            msg: 'berhasil register')
+                                        .then(
+                                      (value) =>
+                                          Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const LoginPage()),
+                                      ),
+                                    ),
+                                  );
+                            } catch (e) {
+                              Fluttertoast.showToast(msg: e.toString());
+                            }
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(80.0)),
+                          padding: const EdgeInsets.all(0.0),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 68, 85, 195),
+                                    Color(0xff64B6FF)
+                                  ],
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                ),
+                                borderRadius: BorderRadius.circular(30.0)),
+                            child: Container(
+                              constraints: const BoxConstraints(
+                                  maxWidth: 400.0, minHeight: 50.0),
+                              alignment: Alignment.center,
+                              child: const Text(
+                                "SIGN UP",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Serif",
+                                    fontWeight: FontWeight.bold),
                               ),
-                              borderRadius: BorderRadius.circular(30.0)),
-                          child: Container(
-                            constraints: const BoxConstraints(
-                                maxWidth: 400.0, minHeight: 50.0),
-                            alignment: Alignment.center,
-                            child: const Text(
-                              "SIGN UP",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Serif",
-                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),

@@ -1,18 +1,13 @@
-import 'package:final_project_kel_2/provider/product_provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:final_project_kel_2/models/product_model/productmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 
 class ProductDetail extends StatelessWidget {
-  const ProductDetail({super.key});
-  static const routeName = '/detail-page';
+  final ProductModel product;
+  const ProductDetail({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    final productId = ModalRoute.of(context)?.settings.arguments as String;
-    // final productData = Provider.of<Products>(context).listProduct.firstWhere(
-    //     (product_id) => product_id.productData. == productId);
-    String _textLorem = lorem(words: 30);
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -42,10 +37,16 @@ class ProductDetail extends StatelessWidget {
                   ),
                   width: double.infinity,
                   height: 300,
-                  // child: Image.asset(
-                  //   productData.productData.productDetail.img,
-                  //   width: double.infinity,
-                  // ),
+                  child: CachedNetworkImage(
+                    imageUrl: product.img,
+                    errorWidget: (context, url, error) => const Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    ),
+                    fit: BoxFit.fill,
+                    placeholder: (context, url) =>
+                        const CircularProgressIndicator(),
+                  ),
                 ),
                 Container(
                   padding:
@@ -55,26 +56,18 @@ class ProductDetail extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            'ini text nama produk dari produk model',
-                            style: TextStyle(
+                          Text(
+                            product.name,
+                            style: const TextStyle(
                               fontSize: 28,
-                              fontWeight: FontWeight.w300,
-                              fontFamily: "Serif",
                             ),
                           ),
-                          Column(
-                            children: const [
-                              Text(
-                                'ini harga dari produk model',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w300,
-                                  fontFamily: "Serif",
-                                ),
-                              ),
-                            ],
-                          )
+                          Text(
+                            product.price.toString(),
+                            style: const TextStyle(
+                              fontSize: 24,
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(
@@ -92,19 +85,10 @@ class ProductDetail extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Deskripsi Produk",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w300,
-                              fontFamily: "Serif",
-                            ),
-                          ),
                           Text(
-                            _textLorem,
+                            product.description,
                             style: const TextStyle(
-                              fontSize: 12,
-                              fontFamily: "Serif",
+                              fontSize: 20,
                             ),
                           ),
                         ],

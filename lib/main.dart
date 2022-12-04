@@ -1,13 +1,10 @@
 import 'package:final_project_kel_2/Screens/home.dart';
-import 'package:final_project_kel_2/Screens/product_detail.dart';
-import 'package:final_project_kel_2/models/productmodel.dart';
-import 'package:final_project_kel_2/provider/api/product_api.dart';
-import 'package:final_project_kel_2/provider/card_product.dart';
-import 'package:final_project_kel_2/provider/product_provider.dart';
+import 'package:final_project_kel_2/view_models/product_view_model.dart';
+import 'package:final_project_kel_2/view_models/user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:final_project_kel_2/provider/login_provider.dart';
-import 'package:final_project_kel_2/provider/signup_provider.dart';
+import 'package:final_project_kel_2/view_models/login_view_model.dart';
+import 'package:final_project_kel_2/view_models/register_view_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,28 +17,25 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => SignupProv(),
+          create: (_) => RegisterViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (_) => LoginProv(),
+          create: (_) => LoginViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (context) => ProductApi(),
+          create: (context) => ProductViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (context) => CardProductData(),
+          create: (context) => UserViewModel(),
         ),
       ],
       child: MaterialApp(
-        routes: {
-          ProductDetail.routeName: (context) => const ProductDetail(),
-        },
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Home(),
+        home: const Home(),
       ),
     );
   }
