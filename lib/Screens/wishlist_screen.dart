@@ -58,7 +58,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
               itemCard('Baju', 'baju', '100', 'images/logo.jpg'),
               itemCard('Celana', 'celana', '200', 'images/logo.jpg'),
               itemCard('Sepatu', 'sepatu', '300', 'images/logo.jpg'),
-              itemCard('Sweater', 'sweater', '400', 'images/logo.jpg')
+              itemCard('Sweater', 'sweater', '400', 'images/logo.jpg'),
             ],
           ),
           const SizedBox(height: 15)
@@ -130,7 +130,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                           )
                         ],
                       ),
-                      const SizedBox(height: 10.0),
+                      const SizedBox(height: 5.0),
                       Text(
                         // ignore: prefer_interpolation_to_compose_strings
                         '\$' + price,

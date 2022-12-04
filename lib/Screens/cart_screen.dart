@@ -12,6 +12,40 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
+    Widget button = SizedBox(
+      height: 45.0,
+      child: MaterialButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Success()));
+        },
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+        padding: const EdgeInsets.all(0.0),
+        child: Ink(
+          decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Color.fromARGB(255, 68, 85, 195), Color(0xff64B6FF)],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              borderRadius: BorderRadius.circular(30.0)),
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+            alignment: Alignment.center,
+            child: const Text(
+              "Continue",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "Serif",
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      ),
+    );
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -58,10 +92,12 @@ class _CartScreenState extends State<CartScreen> {
               itemCard('Baju', 'baju', '100', 'images/logo.jpg'),
               itemCard('Celana', 'celana', '200', 'images/logo.jpg'),
               itemCard('Sepatu', 'sepatu', '300', 'images/logo.jpg'),
-              itemCard('Sweater', 'sweater', '400', 'images/logo.jpg')
+              itemCard('Sweater', 'sweater', '400', 'images/logo.jpg'),
+              const SizedBox(height: 25),
+              button
             ],
           ),
-          const SizedBox(height: 15)
+          const SizedBox(height: 20)
         ]),
       ),
     );
@@ -121,29 +157,16 @@ class _CartScreenState extends State<CartScreen> {
                             fontSize: 13.0,
                             color: Colors.blue.shade900),
                       ),
-                      const SizedBox(height: 10.0),
-                      Row(
-                        children: [
-                          Text(
-                            // ignore: prefer_interpolation_to_compose_strings
-                            '\$' + price,
-                            style: TextStyle(
-                                fontFamily: 'serif',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22.0,
-                                color: Colors.green.shade600),
-                          ),
-                          const SizedBox(width: 40),
-                          ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Success()));
-                              },
-                              child: const Text('CHECKOUT'))
-                        ],
-                      )
+                      const SizedBox(height: 15.0),
+                      Text(
+                        // ignore: prefer_interpolation_to_compose_strings
+                        '\$' + price,
+                        style: TextStyle(
+                            fontFamily: 'serif',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22.0,
+                            color: Colors.green.shade600),
+                      ),
                     ],
                   )
                 ],

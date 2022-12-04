@@ -105,6 +105,25 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'Menu Page',
+          style: TextStyle(
+              fontFamily: "Serif",
+              fontWeight: FontWeight.bold,
+              shadows: [
+                Shadow(
+                  color: Colors.black,
+                  blurRadius: 10.0,
+                  offset: Offset(1.0, 3.0),
+                ),
+                Shadow(
+                  color: Color.fromARGB(255, 71, 147, 248),
+                  blurRadius: 10.0,
+                  offset: Offset(-5.0, 5.0),
+                ),
+              ]),
+        ),
         automaticallyImplyLeading: false,
         elevation: 2,
         leading: Container(
