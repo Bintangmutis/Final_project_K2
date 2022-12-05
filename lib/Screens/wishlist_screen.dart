@@ -1,3 +1,4 @@
+import 'package:final_project_kel_2/Screens/info.dart';
 import 'package:flutter/material.dart';
 
 class WishlistScreen extends StatefulWidget {
@@ -97,38 +98,25 @@ class _WishlistScreenState extends State<WishlistScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Text(
-                            itemName,
-                            style: TextStyle(
-                                fontFamily: 'serif',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17.0,
-                                color: Colors.blue.shade900),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            // ignore: prefer_interpolation_to_compose_strings
-                            'Category: ' + category,
-                            style: TextStyle(
-                                fontFamily: 'serif',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13.0,
-                                color: Colors.blue.shade900),
-                          ),
-                          const SizedBox(width: 40),
-                          Icon(
-                            Icons.star_rounded,
-                            size: 35,
-                            color: Colors.yellow.shade600,
-                          )
-                        ],
+                      Text(
+                        itemName,
+                        style: TextStyle(
+                            fontFamily: 'serif',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
+                            color: Colors.blue.shade900),
                       ),
                       const SizedBox(height: 5.0),
+                      Text(
+                        // ignore: prefer_interpolation_to_compose_strings
+                        'Category: ' + category,
+                        style: TextStyle(
+                            fontFamily: 'serif',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13.0,
+                            color: Colors.blue.shade900),
+                      ),
+                      const SizedBox(height: 15.0),
                       Text(
                         // ignore: prefer_interpolation_to_compose_strings
                         '\$' + price,
@@ -138,8 +126,32 @@ class _WishlistScreenState extends State<WishlistScreen> {
                             fontSize: 22.0,
                             color: Colors.green.shade600),
                       ),
-                      const SizedBox(width: 40),
                     ],
+                  ),
+                  PopupMenuButton(
+                    icon: const Icon(Icons.menu_rounded),
+                    iconSize: 20,
+                    itemBuilder: (context) {
+                      return [
+                        const PopupMenuItem<int>(
+                          value: 0,
+                          child: Text(
+                            "Delete from wishlist",
+                            style: TextStyle(
+                                fontFamily: 'serif',
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ];
+                    },
+                    onSelected: ((value) {
+                      if (value == 0) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Info()));
+                      }
+                    }),
                   )
                 ],
               ))),

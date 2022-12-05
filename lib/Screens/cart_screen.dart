@@ -135,17 +135,13 @@ class _CartScreenState extends State<CartScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Text(
-                            itemName,
-                            style: TextStyle(
-                                fontFamily: 'serif',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17.0,
-                                color: Colors.blue.shade900),
-                          ),
-                        ],
+                      Text(
+                        itemName,
+                        style: TextStyle(
+                            fontFamily: 'serif',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
+                            color: Colors.blue.shade900),
                       ),
                       const SizedBox(height: 5.0),
                       Text(

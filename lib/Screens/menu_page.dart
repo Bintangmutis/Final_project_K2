@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:final_project_kel_2/Screens/category_screen.dart';
+import 'package:final_project_kel_2/Screens/baju_screen.dart';
+import 'package:final_project_kel_2/Screens/celana_screen.dart';
 import 'package:final_project_kel_2/Screens/product_detail.dart';
+import 'package:final_project_kel_2/Screens/sepatu_screen.dart';
+import 'package:final_project_kel_2/Screens/sweater_screen.dart';
 import 'package:final_project_kel_2/Screens/user_profile.dart';
 import 'package:final_project_kel_2/models/product_model/productmodel.dart';
 import 'package:final_project_kel_2/view_models/product_view_model.dart';
@@ -15,91 +18,6 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-//   bool _searchBoolean = false;
-//   List<int> _searchIndexList = [];
-//   List<Product> _list = [
-//     Product(
-//       productId: "1",
-//       productImg: "images/contoh_baju.jpeg",
-//       productName: "Tshirt",
-//       productPrice: "50000",
-//     ),
-//     Product(
-//       productId: "2",
-//       productImg: "images/contoh_baju.jpeg",
-//       productName: "Sweeter",
-//       productPrice: "50000",
-//     ),
-//     Product(
-//       productId: "3",
-//       productImg: "images/contoh_baju.jpeg",
-//       productName: "Jacket",
-//       productPrice: "50000",
-//     ),
-//   ];
-
-// Widget _searchTextField() {
-//     return TextField(
-//       onChanged: (String s) {
-//         setState(() {
-//           _searchIndexList = [];
-//           for (int i = 0; i < _list.length; i++) {
-//             if (_list[i].contains(s)) {
-//               _searchIndexList.add(i);
-//             }
-//           }
-//         });
-//       },
-//       autofocus: true,
-//       cursorColor: Colors.white,
-//       style: TextStyle(
-//         color: Colors.white,
-//         fontSize: 20,
-//       ),
-//       textInputAction: TextInputAction.search,
-//       decoration: InputDecoration(
-//         enabledBorder: UnderlineInputBorder(
-//           borderSide: BorderSide(color: Colors.white)
-//         ),
-//         focusedBorder: UnderlineInputBorder(
-//           borderSide: BorderSide(color: Colors.white)
-//         ),
-//         hintText: 'Search',
-//         hintStyle: TextStyle(
-//           color: Colors.white60,
-//           fontSize: 20,
-//         ),
-//       ),
-//     );
-//   }
-
-//    Widget _searchListView() {
-//     return ListView.builder(
-//       itemCount: _searchIndexList.length,
-//       itemBuilder: (context, index) {
-//         index = _searchIndexList[index];
-//         return Card(
-//           child: ListTile(
-//             title: Text(_list[index])
-//           )
-//         );
-//       }
-//     );
-//   }
-
-//   Widget _defaultListView() {
-//     return ListView.builder(
-//       itemCount: _list.length,
-//       itemBuilder: (context, index) {
-//         return Card(
-//           child: ListTile(
-//             title: Text(_list[index])
-//           )
-//         );
-//       }
-//     );
-//   }
-
   @override
   void initState() {
     super.initState();
@@ -140,6 +58,11 @@ class _MenuPageState extends State<MenuPage> {
               borderRadius: BorderRadius.circular(8),
             ),
             child: PopupMenuButton(
+              color: Colors.blue.shade50,
+              padding: const EdgeInsets.all(10),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              elevation: 10,
               itemBuilder: (context) {
                 return [
                   const PopupMenuItem<int>(
@@ -182,27 +105,28 @@ class _MenuPageState extends State<MenuPage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              const CategoryScreen(categoryName: "k2_baju")));
+                              const BajuScreen(categoryName: "k2_baju")));
                 } else if (value == 1) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const CategoryScreen(
-                              categoryName: "k2_sweater")));
+                          builder: (context) =>
+                              const SweaterScreen(categoryName: "k2_sweater")));
                 } else if (value == 2) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              const CategoryScreen(categoryName: "k2_celana")));
+                              const CelanaScreen(categoryName: "k2_celana")));
                 } else if (value == 3) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              const CategoryScreen(categoryName: "k2_sepatu")));
+                              const SepatuScreen(categoryName: "k2_sepatu")));
                 }
               }),
+              child: const Icon(Icons.menu),
             )),
         actions: [
           Container(
@@ -248,19 +172,21 @@ class _MenuPageState extends State<MenuPage> {
             ],
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                // ===== MENU =====
-                const SizedBox(
-                  height: 8,
-                ),
-                _listOfProducts(),
-              ],
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  // ===== MENU =====
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  _listOfProducts(),
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
@@ -270,9 +196,6 @@ class _MenuPageState extends State<MenuPage> {
     return Consumer<ProductViewModel>(
       builder: (context, product, _) => Column(
         children: [
-          const SizedBox(
-            height: 10,
-          ),
           GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -298,38 +221,46 @@ Widget _cardProduct(ProductModel product, BuildContext context) {
           builder: (context) => ProductDetail(product: product)));
     },
     child: Card(
-      color: Colors.transparent,
+      color: const Color.fromARGB(129, 255, 255, 255),
       elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: 110,
             width: MediaQuery.of(context).size.width,
-            child: CachedNetworkImage(
-              imageUrl: product.img,
-              errorWidget: (context, url, error) => const Icon(
-                Icons.error,
-                color: Colors.red,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child: CachedNetworkImage(
+                imageUrl: product.img,
+                errorWidget: (context, url, error) => const Icon(
+                  Icons.error,
+                  color: Colors.red,
+                ),
+                fit: BoxFit.fill,
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
               ),
-              fit: BoxFit.fill,
-              placeholder: (context, url) => const CircularProgressIndicator(),
             ),
           ),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 product.name.toString(),
                 style: const TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 12.0,
                   color: Color.fromARGB(255, 62, 65, 102),
                 ),
               ),
               Text(
                 product.price.toString(),
                 style: const TextStyle(
-                  fontSize: 16.0,
+                  fontSize: 12.0,
                   color: Color.fromARGB(255, 62, 65, 102),
                 ),
               ),
