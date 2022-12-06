@@ -32,6 +32,8 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 71, 147, 248),
+        shadowColor: const Color.fromARGB(255, 0, 11, 106),
         centerTitle: true,
         title: const Text(
           'Menu Page',

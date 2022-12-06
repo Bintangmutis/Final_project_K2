@@ -101,7 +101,11 @@ class _CartScreenState extends State<CartScreen> {
               backgroundColor: Colors.green.shade50,
               label: 'Checkout All Keranjang',
               onTap: () {
-                Fluttertoast.showToast(msg: 'Pembayaran Berhasil');
+                Fluttertoast.showToast(msg: 'Pembayaran Berhasil').then(
+                    (value) => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Success())));
               }),
         ],
       ),
