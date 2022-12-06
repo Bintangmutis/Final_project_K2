@@ -1,5 +1,5 @@
 import 'package:final_project_kel_2/Screens/bottomnav.dart';
-import 'package:final_project_kel_2/Screens/signup.dart';
+import 'package:final_project_kel_2/Screens/signup_screen.dart';
 import 'package:final_project_kel_2/models/login_model/login_model.dart';
 import 'package:final_project_kel_2/view_models/login_view_model.dart';
 import 'package:flutter/material.dart';

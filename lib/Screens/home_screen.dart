@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:final_project_kel_2/Screens/baju_screen.dart';
 import 'package:final_project_kel_2/Screens/celana_screen.dart';
-import 'package:final_project_kel_2/Screens/product_detail.dart';
+import 'package:final_project_kel_2/Screens/product_screen.dart';
 import 'package:final_project_kel_2/Screens/sepatu_screen.dart';
 import 'package:final_project_kel_2/Screens/sweater_screen.dart';
 import 'package:final_project_kel_2/Screens/user_profile.dart';
@@ -258,7 +258,7 @@ Widget _cardProduct(ProductModel product, BuildContext context) {
                 ),
               ),
               Text(
-                product.price.toString(),
+                "Rp ${product.price}",
                 style: const TextStyle(
                   fontSize: 12.0,
                   color: Color.fromARGB(255, 62, 65, 102),

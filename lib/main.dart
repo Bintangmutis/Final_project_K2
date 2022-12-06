@@ -1,6 +1,8 @@
-import 'package:final_project_kel_2/Screens/home.dart';
+import 'package:final_project_kel_2/Screens/splash_screen.dart';
+import 'package:final_project_kel_2/view_models/keranjang_view_model.dart';
 import 'package:final_project_kel_2/view_models/product_view_model.dart';
 import 'package:final_project_kel_2/view_models/user_view_model.dart';
+import 'package:final_project_kel_2/view_models/wishlist_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:final_project_kel_2/view_models/login_view_model.dart';
@@ -27,6 +29,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => UserViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => KeranjangViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => WishlistViewModel(),
         ),
       ],
       child: MaterialApp(

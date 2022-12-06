@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:final_project_kel_2/Screens/product_detail.dart';
+import 'package:final_project_kel_2/Screens/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

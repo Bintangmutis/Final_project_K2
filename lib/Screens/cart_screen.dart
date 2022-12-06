@@ -1,5 +1,11 @@
-import 'package:final_project_kel_2/Screens/success_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:final_project_kel_2/Screens/success_screen.dart';
+import 'package:final_project_kel_2/models/keranjang_model/keranjang_model.dart';
+import 'package:final_project_kel_2/view_models/keranjang_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -11,41 +17,17 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   @override
-  Widget build(BuildContext context) {
-    Widget button = SizedBox(
-      height: 45.0,
-      child: MaterialButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const Success()));
-        },
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
-        padding: const EdgeInsets.all(0.0),
-        child: Ink(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.blue.shade700, Colors.blue.shade200],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
-              borderRadius: BorderRadius.circular(30.0)),
-          child: Container(
-            constraints: const BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
-            alignment: Alignment.center,
-            child: const Text(
-              "CHECKOUT",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "Serif",
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-      ),
-    );
+  void initState() {
+    super.initState();
 
+    Future.microtask(
+      () => Provider.of<KeranjangViewModel>(context, listen: false)
+          .fetchKeranjang(),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -88,27 +70,63 @@ class _CartScreenState extends State<CartScreen> {
         ),
         child: ListView(children: [
           Column(
-            children: <Widget>[
-              itemCard('Baju', 'baju', '100', 'images/logo.jpg'),
-              itemCard('Celana', 'celana', '200', 'images/logo.jpg'),
-              itemCard('Sepatu', 'sepatu', '300', 'images/logo.jpg'),
-              itemCard('Sweater', 'sweater', '400', 'images/logo.jpg'),
-              const SizedBox(height: 25),
-              button
-            ],
+            children: [_listOfKeranjang(), const SizedBox(height: 20)],
           ),
-          const SizedBox(height: 20)
         ]),
+      ),
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_close,
+        backgroundColor: Colors.blue.shade400,
+        overlayColor: const Color.fromARGB(255, 133, 180, 255),
+        overlayOpacity: 0.4,
+        spacing: 10,
+        children: [
+          SpeedDialChild(
+              child: const Icon(
+                Icons.delete,
+                color: Colors.red,
+                size: 30,
+              ),
+              backgroundColor: Colors.yellow.shade50,
+              label: 'Delete Keranjang',
+              onTap: () {
+                Fluttertoast.showToast(msg: 'Deleting Keranjang');
+              }),
+          SpeedDialChild(
+              child: const Icon(
+                Icons.attach_money_rounded,
+                color: Colors.green,
+                size: 25,
+              ),
+              backgroundColor: Colors.green.shade50,
+              label: 'Checkout All Keranjang',
+              onTap: () {
+                Fluttertoast.showToast(msg: 'Pembayaran Berhasil');
+              }),
+        ],
       ),
     );
   }
 
-  Widget itemCard(
-    itemName,
-    category,
-    price,
-    imgPath,
-  ) {
+  Widget _listOfKeranjang() {
+    return Consumer<KeranjangViewModel>(
+      builder: (context, product, _) => Column(
+        children: [
+          ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: product.listkeranjang.length,
+            itemBuilder: (context, index) {
+              final data = product.listkeranjang[index];
+              return itemCard(data, context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget itemCard(KeranjangModel keranjang, BuildContext context) {
     return InkWell(
       child: Padding(
           padding: const EdgeInsets.fromLTRB(10, 15, 10, 1),
@@ -122,13 +140,22 @@ class _CartScreenState extends State<CartScreen> {
               child: Row(
                 children: <Widget>[
                   const SizedBox(width: 5.0),
-                  Container(
-                    height: 125.0,
-                    width: 125.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(60),
-                        image: DecorationImage(
-                            image: AssetImage(imgPath), fit: BoxFit.contain)),
+                  SizedBox(
+                    height: 120,
+                    width: 120,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: CachedNetworkImage(
+                        imageUrl: keranjang.cartProduct.image,
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.error,
+                          color: Colors.red,
+                        ),
+                        fit: BoxFit.fill,
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                      ),
+                    ),
                   ),
                   const SizedBox(width: 15.0),
                   Column(
@@ -136,31 +163,31 @@ class _CartScreenState extends State<CartScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        itemName,
+                        keranjang.cartProduct.nama,
                         style: TextStyle(
                             fontFamily: 'serif',
                             fontWeight: FontWeight.bold,
-                            fontSize: 17.0,
+                            fontSize: 11.0,
                             color: Colors.blue.shade900),
                       ),
                       const SizedBox(height: 5.0),
                       Text(
                         // ignore: prefer_interpolation_to_compose_strings
-                        'Category: ' + category,
+                        'Jumlah: ' + keranjang.quantity.toString(),
                         style: TextStyle(
                             fontFamily: 'serif',
                             fontWeight: FontWeight.bold,
-                            fontSize: 13.0,
+                            fontSize: 10.0,
                             color: Colors.blue.shade900),
                       ),
                       const SizedBox(height: 15.0),
                       Text(
                         // ignore: prefer_interpolation_to_compose_strings
-                        '\$' + price,
+                        '\$' + keranjang.cartProduct.harga.toString(),
                         style: TextStyle(
                             fontFamily: 'serif',
                             fontWeight: FontWeight.bold,
-                            fontSize: 22.0,
+                            fontSize: 18.0,
                             color: Colors.green.shade600),
                       ),
                     ],
