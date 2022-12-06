@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:final_project_kel_2/Screens/baju_screen.dart';
 import 'package:final_project_kel_2/Screens/celana_screen.dart';
-import 'package:final_project_kel_2/Screens/product_detail.dart';
+import 'package:final_project_kel_2/Screens/product_screen.dart';
 import 'package:final_project_kel_2/Screens/search_screen.dart';
 import 'package:final_project_kel_2/Screens/sepatu_screen.dart';
 import 'package:final_project_kel_2/Screens/sweater_screen.dart';
@@ -33,6 +33,8 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 71, 147, 248),
+        shadowColor: const Color.fromARGB(255, 0, 11, 106),
         centerTitle: true,
         title: const Text(
           'Menu Page',
@@ -264,7 +266,7 @@ Widget _cardProduct(ProductModel product, BuildContext context) {
                 ),
               ),
               Text(
-                product.price.toString(),
+                "Rp ${product.price}",
                 style: const TextStyle(
                   fontSize: 12.0,
                   color: Color.fromARGB(255, 62, 65, 102),

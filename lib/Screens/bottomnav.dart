@@ -1,6 +1,6 @@
 import 'package:final_project_kel_2/Screens/cart_screen.dart';
-import 'package:final_project_kel_2/Screens/info.dart';
-import 'package:final_project_kel_2/Screens/menu_page.dart';
+import 'package:final_project_kel_2/Screens/info_screen.dart';
+import 'package:final_project_kel_2/Screens/home_screen.dart';
 import 'package:final_project_kel_2/Screens/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 
