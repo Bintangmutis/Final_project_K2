@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:final_project_kel_2/Screens/info_screen.dart';
 import 'package:final_project_kel_2/models/wishlist_model/wishlist_model.dart';
 import 'package:final_project_kel_2/view_models/wishlist_view_model.dart';
 import 'package:flutter/material.dart';

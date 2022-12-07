@@ -4,8 +4,6 @@ import 'package:final_project_kel_2/models/wishlist_model/wishlist_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../keranjang_model/keranjang_model.dart';
-
 class WishlistApi {
   Future<void> postWishlist(Map data) async {
     SharedPreferences? prefs = await SharedPreferences.getInstance();
