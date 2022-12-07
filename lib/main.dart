@@ -1,6 +1,7 @@
 import 'package:final_project_kel_2/Screens/splash_screen.dart';
 import 'package:final_project_kel_2/view_models/keranjang_view_model.dart';
 import 'package:final_project_kel_2/view_models/product_view_model.dart';
+import 'package:final_project_kel_2/view_models/transaction_view_model.dart';
 import 'package:final_project_kel_2/view_models/user_view_model.dart';
 import 'package:final_project_kel_2/view_models/wishlist_view_model.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => WishlistViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => TransactionViewModel(),
         ),
       ],
       child: MaterialApp(
