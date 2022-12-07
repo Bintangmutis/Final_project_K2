@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:final_project_kel_2/Screens/baju_screen.dart';
 import 'package:final_project_kel_2/Screens/celana_screen.dart';
 import 'package:final_project_kel_2/Screens/product_screen.dart';
+import 'package:final_project_kel_2/Screens/search_screen.dart';
 import 'package:final_project_kel_2/Screens/sepatu_screen.dart';
 import 'package:final_project_kel_2/Screens/sweater_screen.dart';
 import 'package:final_project_kel_2/Screens/user_profile.dart';
@@ -135,7 +136,12 @@ class _MenuPageState extends State<MenuPage> {
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: IconButton(
               icon: const Icon(Icons.search),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SearchScreen()),
+                );
+              },
             ),
           ),
           const SizedBox(
