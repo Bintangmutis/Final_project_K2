@@ -78,8 +78,8 @@ class ProductApi {
         final categoryProduct = product.category.name.toLowerCase();
         final searchText = query.toLowerCase();
 
-        return nameProduct.contains(searchText) ||
-            categoryProduct.contains(searchText);
+        return nameProduct.contains(searchText) &&
+            categoryProduct.contains("k2_$searchText");
         ;
       }).toList();
     } else {

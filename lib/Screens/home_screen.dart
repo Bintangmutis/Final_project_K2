@@ -3,8 +3,6 @@ import 'package:final_project_kel_2/Screens/baju_screen.dart';
 import 'package:final_project_kel_2/Screens/celana_screen.dart';
 import 'package:final_project_kel_2/Screens/product_screen.dart';
 import 'package:final_project_kel_2/Screens/search_screen.dart';
-import 'package:final_project_kel_2/Screens/search_screen_2.dart';
-import 'package:final_project_kel_2/Screens/search_coba.dart';
 import 'package:final_project_kel_2/Screens/sepatu_screen.dart';
 import 'package:final_project_kel_2/Screens/sweater_screen.dart';
 import 'package:final_project_kel_2/Screens/user_profile.dart';
@@ -141,7 +139,7 @@ class _MenuPageState extends State<MenuPage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SearchCoba()),
+                  MaterialPageRoute(builder: (context) => SearchScreen()),
                 );
               },
             ),

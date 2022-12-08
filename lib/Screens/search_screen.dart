@@ -3,32 +3,34 @@ import 'dart:async';
 import 'package:final_project_kel_2/Screens/product_screen.dart';
 import 'package:final_project_kel_2/Screens/search_widget.dart';
 import 'package:final_project_kel_2/models/product_model/api/product_api.dart';
+import 'package:final_project_kel_2/models/product_model/productmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:final_project_kel_2/view_models/product_view_model.dart';
-import '../models/product_model/productmodel.dart';
+
+import '../view_models/product_view_model.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
-
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  SearchScreenState createState() => SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
-  List<ProductModel> products = [];
+class SearchScreenState extends State<SearchScreen> {
+  List<ProductModel> _products = [];
+  List<ProductModel> get products => _products;
   String query = '';
   Timer? debouncer;
 
   @override
   void initState() {
     super.initState();
-
-    // Future.microtask(
-    //   () => Provider.of<ProductViewModel>(context, listen: false)
-    //       .fetchProductByCategoryName("k2"),
-    // );
-
+    Future.microtask(
+      () => Provider.of<ProductViewModel>(context, listen: false)
+          .fetchProductByCategoryName("k2"),
+    );
+    Future.microtask(
+      () => Provider.of<ProductViewModel>(context, listen: false)
+          .searchProductByName("k2"),
+    );
     init();
   }
 
@@ -50,80 +52,84 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Future init() async {
-    final products = await ProductApi().searchProduct(query);
+    // final products = await ProductApi().searchProduct(query);
+    final products = await ProductViewModel().listProductByCategory;
 
-    setState(() => this.products = products);
+    setState(() => this._products = products);
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text("title"),
+          title: Text("test"),
           centerTitle: true,
         ),
-        body: Consumer<ProductViewModel>(
-          builder: (context, search, _) => Column(
-            children: <Widget>[
-              buildSearch(),
-              // GridView.builder(
-              //   physics: const NeverScrollableScrollPhysics(),
-              //   shrinkWrap: true,
-              //   itemCount: search.listProductByCategory.length,
-              //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              //     crossAxisCount: 2,
-              //   ),
-              //   itemBuilder: (context, index) {
-              //     final data = search.listProductByCategory[index];
-              //     return buildProduct(data, context);
-              //   },
-              // ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: search.listProductByCategory.length,
-                  itemBuilder: (context, index) {
-                    final book = search.listProductByCategory[index];
-
-                    return buildProduct(book, context);
-                  },
-                ),
-              ),
-              // Expanded(
-              //   child: GridView.builder(
-              //     physics: const NeverScrollableScrollPhysics(),
-              //     shrinkWrap: true,
-              //     itemCount: search.listProductByCategory.length,
-              //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              //       crossAxisCount: 2,
-              //     ),
-              //     itemBuilder: (context, index) {
-              //       final data = search.listProductByCategory[index];
-              //       return buildProduct(data, context);
-              //     },
-              //   ),
-              // ),
-            ],
-          ),
+        body: Column(
+          children: <Widget>[
+            buildSearch(),
+            _listOfSearch(),
+          ],
         ),
       );
 
   Widget buildSearch() => SearchWidget(
         text: query,
-        hintText: 'Title or Author Name',
-        onChanged: _searchProduct,
+        hintText: 'Name or Category Product',
+        onChanged: searchBook,
       );
 
-  Future _searchProduct(String query) async => debounce(
-        () async {
-          final products = await ProductApi().searchProduct(query);
+  Widget _listOfSearch() {
+    return Consumer<ProductViewModel>(
+      builder: (context, search, _) => query == ''
+          ? Expanded(
+              child: ListView.builder(
+                itemCount: search.listProductByCategory.length,
+                itemBuilder: (context, index) {
+                  final data = search.listProductByCategory[index];
+                  return buildProduct(data, context);
+                },
+              ),
+            )
+          : Expanded(
+              child: ListView.builder(
+                itemCount: search.listProductSearch.length,
+                itemBuilder: (context, index) {
+                  final data = search.listProductSearch[index];
+                  return buildProduct(data, context);
+                },
+              ),
+            ),
+    );
+  }
 
-          if (!mounted) return;
+  Future searchBook(String query) async => debounce(() async {
+        Provider.of<ProductViewModel>(context, listen: false)
+            .searchProductByName(query);
 
-          setState(() {
-            this.query = query;
-            this.products = products;
-          });
-        },
-      );
+        if (!mounted) return;
+
+        setState(() {
+          this.query = query;
+        });
+      });
+
+  // Widget _listOfSearch() {
+  //   return Consumer<ProductViewModel>(
+  //     builder: (context, product, _) => Column(
+  //       children: [
+  //         Expanded(
+  //           child: ListView.builder(
+  //             itemCount: product.listProductSearch.length,
+  //             itemBuilder: (context, index) {
+  //               final data = product.listProductSearch[index];
+  //               return buildProduct(data, context);
+  //             },
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget buildProduct(ProductModel product, BuildContext context) =>
       GestureDetector(
