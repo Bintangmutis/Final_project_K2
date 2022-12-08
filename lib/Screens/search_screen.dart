@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:final_project_kel_2/Screens/product_screen.dart';
 import 'package:final_project_kel_2/Screens/search_widget.dart';
 import 'package:final_project_kel_2/models/product_model/api/product_api.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +24,10 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
 
-    Future.microtask(
-      () => Provider.of<ProductViewModel>(context, listen: false)
-          .fetchProductByCategoryName("k2"),
-    );
+    // Future.microtask(
+    //   () => Provider.of<ProductViewModel>(context, listen: false)
+    //       .fetchProductByCategoryName("k2"),
+    // );
 
     init();
   }
@@ -49,46 +50,61 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Future init() async {
-    final products = await ProductApi.searchProduct(query);
+    final products = await ProductApi().searchProduct(query);
 
     setState(() => this.products = products);
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-        title: Text("title"),
-        centerTitle: true,
-      ),
-      body: Consumer<ProductViewModel>(
-        builder: (context, search, _) => Column(
-          children: <Widget>[
-            buildSearch(),
-            GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: search.listProductByCategory.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
-              itemBuilder: (context, index) {
-                final data = search.listProductByCategory[index];
-                return buildProduct(data);
-              },
-            ),
-            // Expanded(
-            //   child: ListView.builder(
-            //     itemCount: products.length,
-            //     itemBuilder: (context, index) {
-            //       final book = products[index];
-
-            //       return buildProduct(book);
-            //     },
-            //   ),
-            // ),
-          ],
+        appBar: AppBar(
+          title: Text("title"),
+          centerTitle: true,
         ),
-      ));
+        body: Consumer<ProductViewModel>(
+          builder: (context, search, _) => Column(
+            children: <Widget>[
+              buildSearch(),
+              // GridView.builder(
+              //   physics: const NeverScrollableScrollPhysics(),
+              //   shrinkWrap: true,
+              //   itemCount: search.listProductByCategory.length,
+              //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              //     crossAxisCount: 2,
+              //   ),
+              //   itemBuilder: (context, index) {
+              //     final data = search.listProductByCategory[index];
+              //     return buildProduct(data, context);
+              //   },
+              // ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: search.listProductByCategory.length,
+                  itemBuilder: (context, index) {
+                    final book = search.listProductByCategory[index];
+
+                    return buildProduct(book, context);
+                  },
+                ),
+              ),
+              // Expanded(
+              //   child: GridView.builder(
+              //     physics: const NeverScrollableScrollPhysics(),
+              //     shrinkWrap: true,
+              //     itemCount: search.listProductByCategory.length,
+              //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              //       crossAxisCount: 2,
+              //     ),
+              //     itemBuilder: (context, index) {
+              //       final data = search.listProductByCategory[index];
+              //       return buildProduct(data, context);
+              //     },
+              //   ),
+              // ),
+            ],
+          ),
+        ),
+      );
 
   Widget buildSearch() => SearchWidget(
         text: query,
@@ -96,25 +112,34 @@ class _SearchScreenState extends State<SearchScreen> {
         onChanged: _searchProduct,
       );
 
-  Future _searchProduct(String query) async => debounce(() async {
-        final products = await ProductApi.searchProduct(query);
+  Future _searchProduct(String query) async => debounce(
+        () async {
+          final products = await ProductApi().searchProduct(query);
 
-        if (!mounted) return;
+          if (!mounted) return;
 
-        setState(() {
-          this.query = query;
-          this.products = products;
-        });
-      });
+          setState(() {
+            this.query = query;
+            this.products = products;
+          });
+        },
+      );
 
-  Widget buildProduct(ProductModel product) => ListTile(
-        leading: Image.network(
-          product.img,
-          fit: BoxFit.cover,
-          width: 50,
-          height: 50,
+  Widget buildProduct(ProductModel product, BuildContext context) =>
+      GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ProductDetail(product: product)));
+        },
+        child: ListTile(
+          leading: Image.network(
+            product.img,
+            fit: BoxFit.cover,
+            width: 50,
+            height: 50,
+          ),
+          title: Text(product.name),
+          subtitle: Text(product.category.name),
         ),
-        title: Text(product.name),
-        subtitle: Text(product.category.name),
       );
 }

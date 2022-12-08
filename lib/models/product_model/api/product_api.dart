@@ -52,7 +52,7 @@ class ProductApi {
         .toList();
   }
 
-  static Future<List<ProductModel>> searchProduct(String query) async {
+  Future<List<ProductModel>> searchProduct(String query) async {
     Uri url = Uri.parse("https://api1.sib3.nurulfikri.com/api/barang");
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();

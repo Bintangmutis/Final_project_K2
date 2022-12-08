@@ -1,10 +1,11 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:final_project_kel_2/Screens/baju_screen.dart';
 import 'package:final_project_kel_2/Screens/celana_screen.dart';
 import 'package:final_project_kel_2/Screens/product_screen.dart';
 import 'package:final_project_kel_2/Screens/search_screen.dart';
-import 'package:final_project_kel_2/Screens/search_screen_2.dart';
-import 'package:final_project_kel_2/Screens/search_coba.dart';
+import 'package:final_project_kel_2/Screens/search_widget.dart';
 import 'package:final_project_kel_2/Screens/sepatu_screen.dart';
 import 'package:final_project_kel_2/Screens/sweater_screen.dart';
 import 'package:final_project_kel_2/Screens/user_profile.dart';
@@ -13,14 +14,20 @@ import 'package:final_project_kel_2/view_models/product_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MenuPage extends StatefulWidget {
-  const MenuPage({super.key});
+import '../models/product_model/api/product_api.dart';
+
+class SearchScreen2 extends StatefulWidget {
+  const SearchScreen2({super.key});
 
   @override
-  State<MenuPage> createState() => _MenuPageState();
+  State<SearchScreen2> createState() => _SearchScreen2State();
 }
 
-class _MenuPageState extends State<MenuPage> {
+class _SearchScreen2State extends State<SearchScreen2> {
+  List<ProductModel> products = [];
+  String query = '';
+  Timer? debouncer;
+
   @override
   void initState() {
     super.initState();
@@ -29,6 +36,30 @@ class _MenuPageState extends State<MenuPage> {
       () => Provider.of<ProductViewModel>(context, listen: false)
           .fetchProductByCategoryName("k2"),
     );
+    init();
+  }
+
+  @override
+  void dispose() {
+    debouncer?.cancel();
+    super.dispose();
+  }
+
+  void debounce(
+    VoidCallback callback, {
+    Duration duration = const Duration(milliseconds: 1000),
+  }) {
+    if (debouncer != null) {
+      debouncer!.cancel();
+    }
+
+    debouncer = Timer(duration, callback);
+  }
+
+  Future init() async {
+    final products = await ProductApi().searchProduct(query);
+
+    setState(() => this.products = products);
   }
 
   @override
@@ -39,7 +70,7 @@ class _MenuPageState extends State<MenuPage> {
         shadowColor: const Color.fromARGB(255, 0, 11, 106),
         centerTitle: true,
         title: const Text(
-          'Menu Page',
+          'Search Page',
           style: TextStyle(
               fontFamily: "Serif",
               fontWeight: FontWeight.bold,
@@ -58,114 +89,6 @@ class _MenuPageState extends State<MenuPage> {
         ),
         automaticallyImplyLeading: false,
         elevation: 2,
-        leading: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: PopupMenuButton(
-              color: Colors.blue.shade50,
-              padding: const EdgeInsets.all(10),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              elevation: 10,
-              itemBuilder: (context) {
-                return [
-                  const PopupMenuItem<int>(
-                    value: 0,
-                    child: Text(
-                      "Baju",
-                      style: TextStyle(
-                          fontFamily: 'serif', fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  const PopupMenuItem<int>(
-                    value: 1,
-                    child: Text(
-                      "Sweater",
-                      style: TextStyle(
-                          fontFamily: 'serif', fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  const PopupMenuItem<int>(
-                    value: 2,
-                    child: Text(
-                      "Celana",
-                      style: TextStyle(
-                          fontFamily: 'serif', fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  const PopupMenuItem<int>(
-                    value: 3,
-                    child: Text(
-                      "Sepatu",
-                      style: TextStyle(
-                          fontFamily: 'serif', fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ];
-              },
-              onSelected: ((value) {
-                if (value == 0) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const BajuScreen(categoryName: "k2_baju")));
-                } else if (value == 1) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const SweaterScreen(categoryName: "k2_sweater")));
-                } else if (value == 2) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const CelanaScreen(categoryName: "k2_celana")));
-                } else if (value == 3) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const SepatuScreen(categoryName: "k2_sepatu")));
-                }
-              }),
-              child: const Icon(Icons.menu),
-            )),
-        actions: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SearchCoba()),
-                );
-              },
-            ),
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const UserProfile()),
-                );
-              },
-              icon: const Icon(Icons.person),
-            ),
-          ),
-        ],
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -206,6 +129,7 @@ class _MenuPageState extends State<MenuPage> {
     return Consumer<ProductViewModel>(
       builder: (context, product, _) => Column(
         children: [
+          buildSearch(),
           GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -222,6 +146,25 @@ class _MenuPageState extends State<MenuPage> {
       ),
     );
   }
+
+  Widget buildSearch() => SearchWidget(
+        text: query,
+        hintText: 'Name or Category Product',
+        onChanged: _searchProduct,
+      );
+
+  Future _searchProduct(String query) async => debounce(
+        () async {
+          final products = await ProductApi().searchProduct(query);
+
+          if (!mounted) return;
+
+          setState(() {
+            this.query = query;
+            this.products = products;
+          });
+        },
+      );
 }
 
 Widget _cardProduct(ProductModel product, BuildContext context) {
