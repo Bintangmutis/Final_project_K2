@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:final_project_kel_2/Screens/success_screen.dart';
 import 'package:final_project_kel_2/models/keranjang_model/keranjang_model.dart';
 import 'package:final_project_kel_2/view_models/keranjang_view_model.dart';
+import 'package:final_project_kel_2/view_models/transaction_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -74,40 +75,40 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ]),
       ),
-      floatingActionButton: SpeedDial(
-        animatedIcon: AnimatedIcons.menu_close,
-        backgroundColor: Colors.blue.shade400,
-        overlayColor: const Color.fromARGB(255, 133, 180, 255),
-        overlayOpacity: 0.4,
-        spacing: 10,
-        children: [
-          SpeedDialChild(
-              child: const Icon(
-                Icons.delete,
-                color: Colors.red,
-                size: 30,
-              ),
-              backgroundColor: Colors.yellow.shade50,
-              label: 'Delete Keranjang',
-              onTap: () {
-                Fluttertoast.showToast(msg: 'Deleting Keranjang');
-              }),
-          SpeedDialChild(
-              child: const Icon(
-                Icons.attach_money_rounded,
-                color: Colors.green,
-                size: 25,
-              ),
-              backgroundColor: Colors.green.shade50,
-              label: 'Checkout All Keranjang',
-              onTap: () {
-                Fluttertoast.showToast(msg: 'Pembayaran Berhasil').then(
-                    (value) => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Success())));
-              }),
-        ],
+      floatingActionButton: Consumer<TransactionViewModel>(
+        builder: (context, trans, _) => SpeedDial(
+          animatedIcon: AnimatedIcons.menu_close,
+          backgroundColor: Colors.blue.shade400,
+          overlayColor: const Color.fromARGB(255, 133, 180, 255),
+          overlayOpacity: 0.4,
+          spacing: 10,
+          children: [
+            SpeedDialChild(
+                child: const Icon(
+                  Icons.attach_money_rounded,
+                  color: Colors.green,
+                  size: 25,
+                ),
+                backgroundColor: Colors.green.shade50,
+                label: 'Checkout All Keranjang',
+                onTap: () async {
+                  try {
+                    await trans.postTransaction({"alamat": "tes"}).then(
+                      (value) => Fluttertoast.showToast(
+                              msg: 'Checkout all keranjang Success')
+                          .then(
+                        (value) => Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (context) => const Success()),
+                        ),
+                      ),
+                    );
+                  } catch (e) {
+                    Fluttertoast.showToast(msg: e.toString());
+                  }
+                }),
+          ],
+        ),
       ),
     );
   }

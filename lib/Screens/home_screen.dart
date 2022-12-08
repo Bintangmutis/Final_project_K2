@@ -149,21 +149,14 @@ class _MenuPageState extends State<MenuPage> {
           const SizedBox(
             width: 5,
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const UserProfile()),
-                );
-              },
-              icon: const Icon(Icons.person),
-            ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserProfile()),
+              );
+            },
+            icon: const Icon(Icons.person),
           ),
         ],
       ),
