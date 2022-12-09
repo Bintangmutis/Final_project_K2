@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:final_project_kel_2/Screens/product_screen.dart';
 import 'package:final_project_kel_2/Screens/search_widget.dart';
-import 'package:final_project_kel_2/models/product_model/api/product_api.dart';
 import 'package:final_project_kel_2/models/product_model/productmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +9,8 @@ import 'package:provider/provider.dart';
 import '../view_models/product_view_model.dart';
 
 class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
+
   @override
   SearchScreenState createState() => SearchScreenState();
 }
@@ -53,22 +54,57 @@ class SearchScreenState extends State<SearchScreen> {
 
   Future init() async {
     // final products = await ProductApi().searchProduct(query);
+    // ignore: await_only_futures
     final products = await ProductViewModel().listProductByCategory;
 
+    // ignore: unnecessary_this
     setState(() => this._products = products);
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text("test"),
+          title: const Text(
+            'Search Product',
+            style: TextStyle(
+                fontFamily: "Serif",
+                fontWeight: FontWeight.bold,
+                shadows: [
+                  Shadow(
+                    color: Colors.black,
+                    blurRadius: 10.0,
+                    offset: Offset(1.0, 3.0),
+                  ),
+                  Shadow(
+                    color: Color.fromARGB(255, 71, 147, 248),
+                    blurRadius: 10.0,
+                    offset: Offset(-5.0, 5.0),
+                  ),
+                ]),
+          ),
           centerTitle: true,
         ),
-        body: Column(
-          children: <Widget>[
-            buildSearch(),
-            _listOfSearch(),
-          ],
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              stops: const [
+                0.4,
+                0.9,
+              ],
+              colors: [
+                const Color.fromARGB(255, 133, 180, 255),
+                Colors.grey.shade300
+              ],
+            ),
+          ),
+          child: Column(
+            children: <Widget>[
+              buildSearch(),
+              _listOfSearch(),
+            ],
+          ),
         ),
       );
 
@@ -112,24 +148,6 @@ class SearchScreenState extends State<SearchScreen> {
           this.query = query;
         });
       });
-
-  // Widget _listOfSearch() {
-  //   return Consumer<ProductViewModel>(
-  //     builder: (context, product, _) => Column(
-  //       children: [
-  //         Expanded(
-  //           child: ListView.builder(
-  //             itemCount: product.listProductSearch.length,
-  //             itemBuilder: (context, index) {
-  //               final data = product.listProductSearch[index];
-  //               return buildProduct(data, context);
-  //             },
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Widget buildProduct(ProductModel product, BuildContext context) =>
       GestureDetector(

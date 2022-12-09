@@ -3,7 +3,6 @@ import 'package:final_project_kel_2/models/wishlist_model/wishlist_model.dart';
 import 'package:final_project_kel_2/view_models/keranjang_view_model.dart';
 import 'package:final_project_kel_2/view_models/wishlist_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 

@@ -88,94 +88,101 @@ class _UserProfileState extends State<UserProfile> {
             ],
           ),
         ),
-        child: SafeArea(
-            child: Consumer<UserViewModel>(
-          builder: (context, login, _) => Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+        child: Center(
+          child: ListView(
+            shrinkWrap: true,
             children: [
-              const CircleAvatar(
-                radius: 50.0,
-                backgroundImage: AssetImage('images/Profile.jpeg'),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                login.user.name,
-                style: const TextStyle(
-                    fontFamily: 'serif',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30.0),
-              ),
-              const Text(
-                "User",
-                style: TextStyle(
-                    fontFamily: 'serif',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15.0,
-                    letterSpacing: 2.5),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Card(
-                shape: const StadiumBorder(
-                  side: BorderSide(
-                    color: Color.fromARGB(255, 0, 178, 248),
-                    width: 2.0,
-                  ),
+              SafeArea(
+                  child: Consumer<UserViewModel>(
+                builder: (context, login, _) => Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CircleAvatar(
+                      radius: 50.0,
+                      backgroundImage: AssetImage('images/Profile.jpeg'),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      login.user.name,
+                      style: const TextStyle(
+                          fontFamily: 'serif',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30.0),
+                    ),
+                    const Text(
+                      "User",
+                      style: TextStyle(
+                          fontFamily: 'serif',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.0,
+                          letterSpacing: 2.5),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Card(
+                      shape: const StadiumBorder(
+                        side: BorderSide(
+                          color: Color.fromARGB(255, 0, 178, 248),
+                          width: 2.0,
+                        ),
+                      ),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5.0, horizontal: 25.0),
+                      child: ListTile(
+                        leading: const Icon(
+                          FontAwesomeIcons.solidIdCard,
+                          color: Color.fromARGB(255, 133, 180, 255),
+                        ),
+                        title: Text(login.user.id.toString()),
+                      ),
+                    ),
+                    Card(
+                      shape: const StadiumBorder(
+                        side: BorderSide(
+                          color: Color.fromARGB(255, 0, 178, 248),
+                          width: 2.0,
+                        ),
+                      ),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5.0, horizontal: 25.0),
+                      child: ListTile(
+                        leading: const Icon(
+                          Icons.email_rounded,
+                          color: Color.fromARGB(255, 133, 180, 255),
+                        ),
+                        title: Text(login.user.email),
+                      ),
+                    ),
+                    Card(
+                      shape: const StadiumBorder(
+                        side: BorderSide(
+                          color: Color.fromARGB(255, 0, 178, 248),
+                          width: 2.0,
+                        ),
+                      ),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5.0, horizontal: 25.0),
+                      child: ListTile(
+                        leading: const Icon(
+                          FontAwesomeIcons.squarePhone,
+                          color: Color.fromARGB(255, 133, 180, 255),
+                        ),
+                        title: Text(login.user.handphone),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    button
+                  ],
                 ),
-                margin:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 25.0),
-                child: ListTile(
-                  leading: const Icon(
-                    FontAwesomeIcons.solidIdCard,
-                    color: Color.fromARGB(255, 133, 180, 255),
-                  ),
-                  title: Text(login.user.id.toString()),
-                ),
-              ),
-              Card(
-                shape: const StadiumBorder(
-                  side: BorderSide(
-                    color: Color.fromARGB(255, 0, 178, 248),
-                    width: 2.0,
-                  ),
-                ),
-                margin:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 25.0),
-                child: ListTile(
-                  leading: const Icon(
-                    Icons.email_rounded,
-                    color: Color.fromARGB(255, 133, 180, 255),
-                  ),
-                  title: Text(login.user.email),
-                ),
-              ),
-              Card(
-                shape: const StadiumBorder(
-                  side: BorderSide(
-                    color: Color.fromARGB(255, 0, 178, 248),
-                    width: 2.0,
-                  ),
-                ),
-                margin:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 25.0),
-                child: ListTile(
-                  leading: const Icon(
-                    FontAwesomeIcons.squarePhone,
-                    color: Color.fromARGB(255, 133, 180, 255),
-                  ),
-                  title: Text(login.user.handphone),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              button
+              )),
             ],
           ),
-        )),
+        ),
       ),
     );
   }

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:final_project_kel_2/models/product_model/productmodel.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -80,7 +79,6 @@ class ProductApi {
 
         return nameProduct.contains(searchText) &&
             categoryProduct.contains("k2_$searchText");
-        ;
       }).toList();
     } else {
       throw Exception();
