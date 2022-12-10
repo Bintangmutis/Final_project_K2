@@ -1,4 +1,4 @@
-import 'package:final_project_kel_2/Screens/bottomnav.dart';
+import 'package:final_project_kel_2/view/bottomnav.dart';
 import 'package:flutter/material.dart';
 
 class Success extends StatelessWidget {

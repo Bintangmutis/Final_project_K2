@@ -1,4 +1,4 @@
-import 'package:final_project_kel_2/Screens/splash_screen.dart';
+import 'package:final_project_kel_2/view/splash_screen.dart';
 import 'package:final_project_kel_2/view_models/keranjang_view_model.dart';
 import 'package:final_project_kel_2/view_models/product_view_model.dart';
 import 'package:final_project_kel_2/view_models/transaction_view_model.dart';

@@ -1,5 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:final_project_kel_2/Screens/login_screen.dart';
+import 'package:final_project_kel_2/view/login_screen.dart';
 import 'package:final_project_kel_2/view_models/user_view_model.dart';
 
 import 'package:flutter/material.dart';

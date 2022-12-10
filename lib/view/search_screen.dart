@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:final_project_kel_2/Screens/product_screen.dart';
-import 'package:final_project_kel_2/Screens/search_widget.dart';
+import 'package:final_project_kel_2/view/product_screen.dart';
+import 'package:final_project_kel_2/view/search_widget.dart';
 import 'package:final_project_kel_2/models/product_model/productmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

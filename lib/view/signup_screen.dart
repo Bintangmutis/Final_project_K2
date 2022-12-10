@@ -1,4 +1,4 @@
-import 'package:final_project_kel_2/Screens/login_screen.dart';
+import 'package:final_project_kel_2/view/login_screen.dart';
 import 'package:final_project_kel_2/models/register_model/register_model.dart';
 import 'package:final_project_kel_2/view_models/register_view_model.dart';
 import 'package:flutter/material.dart';

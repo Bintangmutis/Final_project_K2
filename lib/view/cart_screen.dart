@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:final_project_kel_2/Screens/success_screen.dart';
+import 'package:final_project_kel_2/view/success_screen.dart';
 import 'package:final_project_kel_2/models/keranjang_model/keranjang_model.dart';
 import 'package:final_project_kel_2/view_models/keranjang_view_model.dart';
 import 'package:final_project_kel_2/view_models/transaction_view_model.dart';

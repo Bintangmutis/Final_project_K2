@@ -1,20 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:final_project_kel_2/Screens/product_screen.dart';
+import 'package:final_project_kel_2/view/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/product_model/productmodel.dart';
 import '../view_models/product_view_model.dart';
 
-class CelanaScreen extends StatefulWidget {
+class SepatuScreen extends StatefulWidget {
   final String categoryName;
-  const CelanaScreen({super.key, required this.categoryName});
+  const SepatuScreen({super.key, required this.categoryName});
 
   @override
-  State<CelanaScreen> createState() => _CelanaScreenState();
+  State<SepatuScreen> createState() => _SepatuScreenState();
 }
 
-class _CelanaScreenState extends State<CelanaScreen> {
+class _SepatuScreenState extends State<SepatuScreen> {
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,7 @@ class _CelanaScreenState extends State<CelanaScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'Category Celana',
+          'Category Sepatu',
           style: TextStyle(
               fontFamily: "Serif",
               fontWeight: FontWeight.bold,

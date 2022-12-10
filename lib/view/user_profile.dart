@@ -1,4 +1,4 @@
-import 'package:final_project_kel_2/Screens/bottomnav.dart';
+import 'package:final_project_kel_2/view/bottomnav.dart';
 import 'package:final_project_kel_2/view_models/user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
